@@ -1,8 +1,8 @@
-package com.whck.dao;
+package com.whck.dao.example;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.whck.dmo.Example;
+import com.whck.dmo.example.Example;
 
 /**
  * 
