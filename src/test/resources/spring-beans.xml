@@ -14,11 +14,11 @@
 		<context:exclude-filter type="annotation"
 			expression="org.springframework.stereotype.Controller" />
 	</context:component-scan>
-	
+
 	<util:properties id="dataSourceInfo">
-		<prop key="url">jdbc:mysql://192.168.0.103/whck</prop>
-		<prop key="username">root</prop>
-		<prop key="password">000000</prop>
+		<prop key="url">jdbc:mysql://192.168.1.103/whck</prop>
+		<prop key="username">admin</prop>
+		<prop key="password">123456</prop>
 		<prop key="driverClassName">com.mysql.jdbc.Driver</prop>
 	</util:properties>
 </beans>

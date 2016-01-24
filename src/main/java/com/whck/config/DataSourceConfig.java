@@ -1,5 +1,7 @@
 package com.whck.config;
 
+import java.util.Properties;
+
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
@@ -16,12 +18,12 @@ public class DataSourceConfig {
 	}
 
 	@Bean(destroyMethod = "close")
-	public BasicDataSource dataSource() {
+	public BasicDataSource dataSource(Properties dataSourceInfo) {
 		BasicDataSource dataSource = new BasicDataSource();
-		dataSource.setUrl("jdbc:mysql://192.168.0.103/test");
-		dataSource.setUsername("root");
-		dataSource.setDriverClassName("com.mysql.jdbc.Driver");
-		dataSource.setPassword("000000");
+		dataSource.setUrl(dataSourceInfo.getProperty("url"));
+		dataSource.setUsername(dataSourceInfo.getProperty("username"));
+		dataSource.setDriverClassName(dataSourceInfo.getProperty("driverClassName"));
+		dataSource.setPassword(dataSourceInfo.getProperty("password"));
 		return dataSource;
 	}
 

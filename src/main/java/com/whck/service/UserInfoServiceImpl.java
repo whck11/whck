@@ -5,8 +5,8 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.whck.dao.UserInfoDao;
-import com.whck.dmo.UserInfo;
+import com.whck.dao.ExampleDao;
+import com.whck.dmo.Example;
 
 /**
  * 
@@ -15,13 +15,13 @@ import com.whck.dmo.UserInfo;
  */
 @Transactional
 @Service
-public class UserInfoServiceImpl implements UserInfoService {
+public class UserInfoServiceImpl implements ExampleService {
 	@Autowired
-	protected UserInfoDao userInfoDao;
+	protected ExampleDao exampleDao;
 
 	@Override
-	public UserInfo findByUserName(String userName) {
-		return this.userInfoDao.findByUserName(userName);
+	public Example findByUserName(String name) {
+		return this.exampleDao.findByName(name);
 	}
 
 }

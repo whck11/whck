@@ -9,7 +9,7 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.context.transaction.TransactionConfiguration;
 
-import com.whck.dmo.UserInfo;
+import com.whck.dmo.Example;
 /**
  * 
  * @author 马健原 2016-1-24
@@ -19,13 +19,13 @@ import com.whck.dmo.UserInfo;
 @ContextConfiguration("classpath:spring-*.xml")
 @TransactionConfiguration(transactionManager = "transactionManager", defaultRollback = false)
 @Transactional
-public class UserInfoServiceTest {
+public class ExampleServiceTest {
 	@Autowired
-	protected UserInfoService userInfoService;
+	protected ExampleService exampleService;
 
 	@Test
-	public void testFindUserInfoByUserName() {
-		UserInfo user = this.userInfoService.findByUserName("whck@163.com");
+	public void testFindExampleByName() {
+		Example user = this.exampleService.findByUserName("whck@163.com");
 		System.out.println(user);
 	}
 }
