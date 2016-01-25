@@ -40,7 +40,7 @@ public class ExampleServiceTest {
 	@Test
 	public void testDelete() {
 		Example e = new Example();
-		e.setId(2);
+		e.setId(3);
 		this.exampleService.delete(e);
 	}
 
