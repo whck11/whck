@@ -30,7 +30,7 @@ public class User implements Serializable {
 	@Column(name="cncl_date")
 	private Date cnclDate;
 
-	private int level;
+	private Integer level;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="logon_date")
@@ -48,7 +48,7 @@ public class User implements Serializable {
 
 	private String remarks;
 
-	private int state;
+	private Integer state;
 
 	//bi-directional many-to-one association to Zone
 	@OneToMany(mappedBy="user")
@@ -97,11 +97,11 @@ public class User implements Serializable {
 		this.cnclDate = cnclDate;
 	}
 
-	public int getLevel() {
+	public Integer getLevel() {
 		return this.level;
 	}
 
-	public void setLevel(int level) {
+	public void setLevel(Integer level) {
 		this.level = level;
 	}
 
@@ -153,11 +153,11 @@ public class User implements Serializable {
 		this.remarks = remarks;
 	}
 
-	public int getState() {
+	public Integer getState() {
 		return this.state;
 	}
 
-	public void setState(int state) {
+	public void setState(Integer state) {
 		this.state = state;
 	}
 
