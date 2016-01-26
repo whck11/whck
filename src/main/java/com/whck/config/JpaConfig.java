@@ -3,6 +3,7 @@ package com.whck.config;
 import javax.sql.DataSource;
 
 import org.hibernate.ejb.HibernatePersistence;
+import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
@@ -18,7 +19,6 @@ import org.springframework.orm.jpa.vendor.HibernateJpaVendorAdapter;
  * @author 马健原 2016-1-24
  *
  */
-@SuppressWarnings("deprecation")
 @Configuration
 @EnableJpaRepositories(basePackages = "com.whck.dao", entityManagerFactoryRef = "entityManagerFactory", repositoryImplementationPostfix = "Impl")
 public class JpaConfig {
@@ -29,7 +29,7 @@ public class JpaConfig {
 		entityManager.setDataSource(dataSource);
 		// 设置packagesToScan就不需要persistence.xml文件了
 		entityManager.setPackagesToScan("com.whck.dmo");
-		entityManager.setPersistenceProviderClass(HibernatePersistence.class);
+		entityManager.setPersistenceProviderClass(HibernatePersistenceProvider.class);
 		HibernateJpaVendorAdapter adapter = new HibernateJpaVendorAdapter();
 		adapter.setGenerateDdl(false);
 		adapter.setShowSql(false);
