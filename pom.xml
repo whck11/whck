@@ -210,7 +210,7 @@
 						<port>9001</port>
 					</httpConnector>
 					<webApp>
-						<contextPath>/food365/manager/</contextPath>
+						<contextPath>/whck/</contextPath>
 					</webApp>
 				</configuration>
 			</plugin>
