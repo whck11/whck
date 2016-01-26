@@ -2,7 +2,6 @@ package com.whck.config;
 
 import javax.sql.DataSource;
 
-import org.hibernate.ejb.HibernatePersistence;
 import org.hibernate.jpa.HibernatePersistenceProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
