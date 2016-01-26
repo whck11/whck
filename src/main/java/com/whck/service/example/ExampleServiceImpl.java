@@ -21,9 +21,8 @@ import com.whck.dmo.example.Example;
 public class ExampleServiceImpl implements ExampleService {
 	@Autowired
 	protected ExampleDao exampleDao;
-	
-	private static Logger logger = Logger.getLogger(Example.class);  
 
+	private static Logger logger = Logger.getLogger(Example.class);
 
 	@Override
 	public Example findByUserName(String name) {
@@ -36,7 +35,14 @@ public class ExampleServiceImpl implements ExampleService {
 		logger.debug("添加成功");
 	}
 
-	public void update(Example example) {
+	public void update(Example example) throws Exception {
+		Example e = this.exampleDao.findOne(example.getId());
+		if (null == e) {
+			throw new Exception("数据为空");
+		}
+		if (example.getName() == null) {
+			e.setName(example.getName());
+		}
 		this.exampleDao.save(example);
 		logger.debug("跟新成功");
 	}

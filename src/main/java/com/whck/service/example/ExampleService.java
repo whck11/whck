@@ -12,7 +12,7 @@ public interface ExampleService {
 
 	public void add(Example example);
 
-	public void update(Example example);
+	public void update(Example example) throws Exception;
 
 	public void delete(Example example);
 }

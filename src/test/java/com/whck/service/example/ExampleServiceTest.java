@@ -47,6 +47,10 @@ public class ExampleServiceTest {
 	@Test
 	public void testUpdate() {
 		Example e = new Example(3, "123");
-		this.exampleService.update(e);
+		try {
+			this.exampleService.update(e);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 	}
 }
