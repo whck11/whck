@@ -27,12 +27,23 @@
 					<div>${LOGIN_ERROR_MSG }</div>
 					<div>
 						<button type="submit" class="btn btn-default">登陆</button>
-						<button type="button" class="btn btn-default">注册</button>
+						<button id="register" type="button" class="btn btn-default">注册</button>
 					</div>
 				</form>
 			</div>
 			<div class="col-xs-4"></div>
 		</div>
 	</div>
+	<script>
+		function bindRegister() {
+			function handler() {
+				window.location = contextPath + '/register/page.do';
+			}
+			$('#register').bind('click', handler);
+		}
+		$(function() {
+			bindRegister();
+		});
+	</script>
 </body>
 </html>

@@ -14,13 +14,23 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User login(String username, String password) throws Exception {
 		User user = userDao.findByUsername(username);
-		if(user==null){
+		if (user == null) {
 			throw new Exception("用户不存在");
 		}
-		if(!user.getPassword().equals(password)){
+		if (!user.getPassword().equals(password)) {
 			throw new Exception("密码错误");
 		}
 		return user;
+	}
+
+	@Override
+	public User findByUsername(String email) {
+		return this.userDao.findByUsername(email);
+	}
+
+	@Override
+	public void add(User user) {
+		this.userDao.save(user);
 	}
 
 }
