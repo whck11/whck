@@ -79,8 +79,10 @@
 		function passwordConfirm() {
 			var password = $('#password').val();
 			var password2 = $('#password2').val();
-			if (password !== password2) {
-				$('#passwordSpan').val('两次输入密码不一致');
+			if (password != password2) {
+				$('#passwordSpan').text('两次输入密码不一致');
+			}else{
+				$('#passwordSpan').text('');
 			}
 		}
 		function cendCode() {
