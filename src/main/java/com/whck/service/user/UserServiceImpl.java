@@ -3,8 +3,8 @@ package com.whck.service.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.whck.dao.example.UserDao;
-import com.whck.dmo.example.User;
+import com.whck.dao.UserDao;
+import com.whck.dmo.User;
 
 @Service
 public class UserServiceImpl implements UserService {

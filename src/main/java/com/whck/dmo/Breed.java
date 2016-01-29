@@ -1,4 +1,4 @@
-package com.whck.dmo.example;
+package com.whck.dmo;
 
 import java.io.Serializable;
 import javax.persistence.*;

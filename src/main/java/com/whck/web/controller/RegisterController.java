@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.whck.dmo.example.User;
+import com.whck.dmo.User;
 import com.whck.service.email.EmailService;
 import com.whck.service.user.UserService;
 import com.whck.web.keys.Keys;

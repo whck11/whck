@@ -1,6 +1,6 @@
 package com.whck.service.user;
 
-import com.whck.dmo.example.User;
+import com.whck.dmo.User;
 
 public interface UserService {
 
