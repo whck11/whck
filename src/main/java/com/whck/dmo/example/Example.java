@@ -1,25 +1,27 @@
 package com.whck.dmo.example;
 
 import java.io.Serializable;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
 
 /**
+ * The persistent class for the example database table.
  * 
- * @author 马健原 2016-1-24
- *
  */
 @Entity
-@Table(name = "example")
+@NamedQuery(name="Example.findAll", query="SELECT e FROM Example e")
 public class Example implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer id;
+
+	private String name;
 
 	public Example() {
-		super();
 	}
+
 
 	public Example(Integer id, String name) {
 		super();
@@ -27,18 +29,10 @@ public class Example implements Serializable {
 		this.name = name;
 	}
 
-	private static final long serialVersionUID = 8883827772773239109L;
-	
-	@Column(name = "id")
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Integer id;
 
-	@Column(name = "name")
-	private String name;
 
 	public Integer getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Integer id) {
@@ -46,7 +40,7 @@ public class Example implements Serializable {
 	}
 
 	public String getName() {
-		return name;
+		return this.name;
 	}
 
 	public void setName(String name) {

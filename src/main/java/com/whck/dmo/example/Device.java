@@ -17,13 +17,13 @@ public class Device implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="device_id")
-	private int deviceId;
+	private Integer deviceId;
 
 	@Column(name="ctrl_mode")
-	private int ctrlMode;
+	private Integer ctrlMode;
 
 	@Column(name="ctrl_way")
-	private int ctrlWay;
+	private Integer ctrlWay;
 
 	@Column(name="device_name")
 	private String deviceName;
@@ -42,27 +42,27 @@ public class Device implements Serializable {
 	public Device() {
 	}
 
-	public int getDeviceId() {
+	public Integer getDeviceId() {
 		return this.deviceId;
 	}
 
-	public void setDeviceId(int deviceId) {
+	public void setDeviceId(Integer deviceId) {
 		this.deviceId = deviceId;
 	}
 
-	public int getCtrlMode() {
+	public Integer getCtrlMode() {
 		return this.ctrlMode;
 	}
 
-	public void setCtrlMode(int ctrlMode) {
+	public void setCtrlMode(Integer ctrlMode) {
 		this.ctrlMode = ctrlMode;
 	}
 
-	public int getCtrlWay() {
+	public Integer getCtrlWay() {
 		return this.ctrlWay;
 	}
 
-	public void setCtrlWay(int ctrlWay) {
+	public void setCtrlWay(Integer ctrlWay) {
 		this.ctrlWay = ctrlWay;
 	}
 
@@ -81,6 +81,7 @@ public class Device implements Serializable {
 	public void setIp(String ip) {
 		this.ip = ip;
 	}
+
 
 	public Zone getZone() {
 		return this.zone;

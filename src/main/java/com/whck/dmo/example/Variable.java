@@ -15,13 +15,16 @@ public class Variable implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	private String name;
+	@Column(name="variable_id")
+	private Integer variableId;
 
 	@Column(name="max_value")
 	private double maxValue;
 
 	@Column(name="min_value")
 	private double minValue;
+
+	private String name;
 
 	private int type;
 
@@ -38,12 +41,12 @@ public class Variable implements Serializable {
 	public Variable() {
 	}
 
-	public String getName() {
-		return this.name;
+	public Integer getVariableId() {
+		return this.variableId;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setVariableId(Integer variableId) {
+		this.variableId = variableId;
 	}
 
 	public double getMaxValue() {
@@ -60,6 +63,14 @@ public class Variable implements Serializable {
 
 	public void setMinValue(double minValue) {
 		this.minValue = minValue;
+	}
+
+	public String getName() {
+		return this.name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public int getType() {

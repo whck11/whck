@@ -16,8 +16,8 @@ public class Zone implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="zone_name")
-	private String zoneName;
+	@Column(name="zone_id")
+	private Integer zoneId;
 
 	private double area;
 
@@ -26,6 +26,9 @@ public class Zone implements Serializable {
 	private String longitude;
 
 	private String remarks;
+
+	@Column(name="zone_name")
+	private String zoneName;
 
 	//bi-directional many-to-one association to Device
 	@OneToMany(mappedBy="zone")
@@ -39,12 +42,12 @@ public class Zone implements Serializable {
 	public Zone() {
 	}
 
-	public String getZoneName() {
-		return this.zoneName;
+	public Integer getZoneId() {
+		return this.zoneId;
 	}
 
-	public void setZoneName(String zoneName) {
-		this.zoneName = zoneName;
+	public void setZoneId(Integer zoneId) {
+		this.zoneId = zoneId;
 	}
 
 	public double getArea() {
@@ -78,6 +81,15 @@ public class Zone implements Serializable {
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
 	}
+
+	public String getZoneName() {
+		return this.zoneName;
+	}
+
+	public void setZoneName(String zoneName) {
+		this.zoneName = zoneName;
+	}
+
 
 	public List<Device> getDevices() {
 		return this.devices;
