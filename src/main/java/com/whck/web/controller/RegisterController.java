@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.whck.dmo.example.User;
@@ -46,14 +47,17 @@ public class RegisterController {
 		return map;
 	}
 
-	@RequestMapping("add.do")
+	@RequestMapping(method = RequestMethod.POST, value = "add.do")
 	public String add(User user, HttpSession session) {
 		String rt = null;
+		if(session.getAttribute(Keys.REGISTER_ACTIVE_CODE)==null){
+			return "register";
+		}
 		if (user.getActivateCode().equals(session.getAttribute(Keys.REGISTER_ACTIVE_CODE).toString())) {
 			this.userService.add(user);
-			rt="login";
-		}else{
-			rt="register";
+			rt = "login";
+		} else {
+			rt = "register";
 		}
 		return rt;
 	}

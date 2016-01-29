@@ -26,6 +26,7 @@ public class LoginController {
 		try {
 			User user = this.userService.login(username, password);
 			session.setAttribute(Keys.LOGIN_SESSION_DATA, user);
+			session.removeAttribute(Keys.LOGIN_ERROR_MSG);
 			return "welcome";
 		} catch (Exception e) {
 			e.printStackTrace();
