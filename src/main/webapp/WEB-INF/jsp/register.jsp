@@ -33,7 +33,8 @@
 						<tr>
 							<td>密码：</td>
 							<td><input type="password" id="password" name="password"
-								required="required" placeholder="密码"></td>
+								required="required" placeholder="密码"
+								onmouseleave="passwordConfirm()"></td>
 							<td></td>
 						</tr>
 						<tr>
@@ -41,25 +42,25 @@
 							<td><input type="password" id="password2" name="password2"
 								required="required" placeholder="确认密码"
 								onmouseleave="passwordConfirm()"></td>
-								<td><span id="passwordSpan"></span></td>
+							<td><span id="passwordSpan"></span></td>
 						</tr>
 						<tr>
 							<td>名字：</td>
 							<td><input type="text" id="name" name="name"
 								required="required" placeholder="名字"></td>
-								<td></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td>手机：</td>
 							<td><input required="required" name="phone" type="tel"
 								placeholder="手机"></td>
-								<td></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td>地址：</td>
 							<td><input required="required" name="address"
 								placeholder="地址"></td>
-								<td></td>
+							<td></td>
 						</tr>
 						<tr>
 							<td>公司：</td>
@@ -81,7 +82,7 @@
 			var password2 = $('#password2').val();
 			if (password != password2) {
 				$('#passwordSpan').text('两次输入密码不一致');
-			}else{
+			} else {
 				$('#passwordSpan').text('');
 			}
 		}
