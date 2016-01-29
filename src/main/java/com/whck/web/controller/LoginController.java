@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.whck.dmo.example.User;
 import com.whck.service.user.UserService;
@@ -21,7 +22,7 @@ public class LoginController {
 		return "login";
 	}
 
-	@RequestMapping("submit.do")
+	@RequestMapping(value="submit.do",method=RequestMethod.POST)
 	public String login(String username, String password, HttpSession session) {
 		try {
 			User user = this.userService.login(username, password);
