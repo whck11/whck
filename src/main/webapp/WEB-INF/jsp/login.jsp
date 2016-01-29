@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>登陆</title>
 <%@include file="/common/meta.jsp"%>
 </head>
 <body>
@@ -16,12 +16,12 @@
 				<form method="post" action="${contextPath }/login/submit.do">
 					<div class="form-group">
 						<label for="username">邮箱：</label> <input type="email"
-							class="form-control" id="username" name="username"
+							class="form-control" required="required" id="username" name="username"
 							placeholder="Email">
 					</div>
 					<div class="form-group">
 						<label for="password">密码：</label> <input type="password"
-							class="form-control" id="password" name="password"
+							class="form-control" required="required" id="password" name="password"
 							placeholder="Password">
 					</div>
 					<div>${LOGIN_ERROR_MSG }</div>
