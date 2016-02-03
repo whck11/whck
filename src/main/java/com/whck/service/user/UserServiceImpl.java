@@ -3,6 +3,7 @@ package com.whck.service.user;
 import java.util.Date;
 
 import javax.transaction.Transactional;
+import javax.transaction.Transactional.TxType;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +34,7 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	@Transactional
+	@Transactional(value=TxType.REQUIRED,rollbackOn=Throwable.class)
 	public void add(User user) {
 		user.setRegDate(new Date());
 		this.userDao.save(user);
