@@ -21,4 +21,5 @@
 		<prop key="password">123456</prop>
 		<prop key="driverClassName">com.mysql.jdbc.Driver</prop>
 	</util:properties>
+	<tx:annotation-driven transaction-manager="transactionManager"/>
 </beans>
