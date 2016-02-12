@@ -20,6 +20,7 @@ import com.whck.web.keys.Keys;
 @RequestMapping("register")
 @Controller
 public class RegisterController {
+	
 	@RequestMapping("page.do")
 	public String page() {
 		return "register";

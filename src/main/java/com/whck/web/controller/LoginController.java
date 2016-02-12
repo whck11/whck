@@ -18,14 +18,19 @@ public class LoginController {
 	private UserService userService;
 
 	@RequestMapping("page.do")
-	public String page(HttpSession session) {
-		return "welcome";
+	public String page() {
+		return "login";
 	}
 
 	@RequestMapping("logOut.do")
 	public String logOut(HttpSession session) {
 		session.removeAttribute(Keys.LOGIN_SESSION_DATA);
-		return "welcome";
+		return "login";
+	}
+
+	@RequestMapping("error.do")
+	public String error() {
+		return "error";
 	}
 
 	@RequestMapping(value = "submit.do", method = RequestMethod.POST)
@@ -34,7 +39,7 @@ public class LoginController {
 			User user = this.userService.login(username, password);
 			session.setAttribute(Keys.LOGIN_SESSION_DATA, user);
 			session.removeAttribute(Keys.LOGIN_ERROR_MSG);
-			return "welcome";
+			return "redirect:/admin/main.do";
 		} catch (Exception e) {
 			e.printStackTrace();
 			session.setAttribute(Keys.LOGIN_ERROR_MSG, e.getMessage());

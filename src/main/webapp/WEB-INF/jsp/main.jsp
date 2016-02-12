@@ -17,8 +17,34 @@
 	</div>
 	<div data-options="region:'south',split:true" style="height: 100px;"></div>
 	<div data-options="region:'west',title:'后台管理',split:true"
-		style="width: 180px;"></div>
+		style="width: 180px;">
+		<div id="aa" class="easyui-accordion"
+			style="width: 170px; height: 420px;">
+			<div title="用户管理" data-options="iconCls:'icon-man'"
+				style="overflow: auto; padding: 10px;">
+				<p>
+					<a href="javascript:void(0)" onclick="setFrm(this)"
+						data-url="${contextPath }/admin/info.do">账户信息</a>
+				</p>
+				<p>
+					<a href="javascript:void(0)">用户列表</a>
+				</p>
+			</div>
+			<div title="Title2"
+				data-options="iconCls:'icon-reload',selected:true"
+				style="padding: 10px;"></div>
+		</div>
+	</div>
 	<div data-options="region:'center'"
-		style="padding: 5px; background: #eee;"></div>
+		style="padding: 5px; background: #eee;">
+		<iframe id="adminFrm" style="border: 0px;" width="100%"
+			height="100%"></iframe>
+	</div>
+	<script type="text/javascript">
+		function setFrm(t) {
+			var url = $(t).data('url');
+			$('#adminFrm').attr('src', url);
+		}
+	</script>
 </body>
 </html>

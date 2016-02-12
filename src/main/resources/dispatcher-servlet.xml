@@ -14,4 +14,10 @@
 	<mvc:resources location="/images/" mapping="/images/**" />
 	<mvc:resources location="/js/" mapping="/js/**" />
 	<mvc:resources location="/css/" mapping="/css/**" />
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**"/>
+			<bean class="com.whck.web.interceptor.LoginHandlerInterceptor" />
+		</mvc:interceptor>
+	</mvc:interceptors>
 </beans>
