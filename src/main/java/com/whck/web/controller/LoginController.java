@@ -18,11 +18,17 @@ public class LoginController {
 	private UserService userService;
 
 	@RequestMapping("page.do")
-	public String page() {
-		return "login";
+	public String page(HttpSession session) {
+		return "welcome";
 	}
 
-	@RequestMapping(value="submit.do",method=RequestMethod.POST)
+	@RequestMapping("logOut.do")
+	public String logOut(HttpSession session) {
+		session.removeAttribute(Keys.LOGIN_SESSION_DATA);
+		return "welcome";
+	}
+
+	@RequestMapping(value = "submit.do", method = RequestMethod.POST)
 	public String login(String username, String password, HttpSession session) {
 		try {
 			User user = this.userService.login(username, password);

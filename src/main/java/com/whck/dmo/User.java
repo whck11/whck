@@ -5,34 +5,43 @@ import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
-
 /**
  * The persistent class for the user database table.
  * 
  */
 @Entity
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private String username;
 
-	@Column(name="activate_code")
+	@Column(name = "activate_code")
 	private String activateCode;
 
 	private String address;
+	@Column(name = "is_admin")
+	private Boolean isAdmin;
+
+	public Boolean getIsAdmin() {
+		return isAdmin;
+	}
+
+	public void setIsAdmin(Boolean isAdmin) {
+		this.isAdmin = isAdmin;
+	}
 
 	private String cname;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="cncl_date")
+	@Column(name = "cncl_date")
 	private Date cnclDate;
 
 	private Integer level;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="logon_date")
+	@Column(name = "logon_date")
 	private Date logonDate;
 
 	private String name;
@@ -42,15 +51,15 @@ public class User implements Serializable {
 	private String phone;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="reg_date")
+	@Column(name = "reg_date")
 	private Date regDate;
 
 	private String remarks;
 
 	private Integer state;
 
-	//bi-directional many-to-one association to Zone
-	@OneToMany(mappedBy="user")
+	// bi-directional many-to-one association to Zone
+	@OneToMany(mappedBy = "user")
 	private List<Zone> zones;
 
 	public User() {
@@ -178,7 +187,6 @@ public class User implements Serializable {
 	public Zone removeZone(Zone zone) {
 		getZones().remove(zone);
 		zone.setUser(null);
-
 		return zone;
 	}
 
