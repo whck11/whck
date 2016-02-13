@@ -17,17 +17,8 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/admin/**" />
+			<mvc:mapping path="/user/**" />
 			<bean class="com.whck.web.interceptor.LoginHandlerInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>
-	<bean
-		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter">
-		<property name="messageConverters">
-			<list>
-				<ref bean="mappingJacksonHttpMessageConverter" /><!-- json转换器 -->
-			</list>
-		</property>
-	</bean>
-	<bean id="mappingJacksonHttpMessageConverter"
-		class="org.springframework.http.converter.json.MappingJacksonHttpMessageConverter" />
 </beans>

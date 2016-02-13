@@ -27,7 +27,8 @@
 						data-url="${contextPath }/admin/info.do">账户信息</a>
 				</p>
 				<p>
-					<a href="javascript:void(0)">用户列表</a>
+					<a href="javascript:void(0)" onclick="setFrm(this)"
+						data-url="${contextPath }/user/userList.do">用户列表</a>
 				</p>
 			</div>
 			<div title="Title2"
