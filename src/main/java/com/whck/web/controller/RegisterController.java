@@ -1,5 +1,6 @@
 package com.whck.web.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -55,6 +56,7 @@ public class RegisterController {
 			return "register";
 		}
 		if (user.getActivateCode().equals(session.getAttribute(Keys.REGISTER_ACTIVE_CODE).toString())) {
+			user.setRegDate(new Date());
 			this.userService.add(user);
 			rt = "login";
 		} else {

@@ -38,7 +38,7 @@
 	<div data-options="region:'center'"
 		style="padding: 5px; background: #eee;">
 		<iframe id="adminFrm" style="border: 0px;" width="100%"
-			height="100%"></iframe>
+			height="500px"></iframe>
 	</div>
 	<script type="text/javascript">
 		function setFrm(t) {
