@@ -12,6 +12,13 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12">
+			<button class="btn btn-default">添加</button>
+			<button class="btn btn-default">修改</button>
+			<button class="btn btn-default">删除</button>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-12">
 				<table class="table table-striped">
 					<thead>
 						<tr>
@@ -41,7 +48,8 @@
 	</div>
 	<script>
 		function loadTable() {
-			$('#pp').pagination(
+			$('#pp')
+					.pagination(
 							{
 								total : "${totalElements}",
 								pageSize : "${pageSize}",

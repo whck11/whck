@@ -24,7 +24,6 @@
 
 		</div>
 	</div>
-	<div data-options="region:'south',split:true" style="height: 100px;"></div>
 	<div data-options="region:'west',title:'后台管理',split:true"
 		style="width: 180px;">
 		<div id="aa" class="easyui-accordion"
@@ -40,14 +39,14 @@
 						data-url="${contextPath }/user/userList.do">用户列表</a>
 				</p>
 			</div>
-			<div title="Title2"
+			<div title="区域管理"
 				data-options="iconCls:'icon-reload',selected:true"
 				style="padding: 10px;"></div>
 		</div>
 	</div>
 	<div data-options="region:'center'"
 		style="padding: 5px; background: #eee;">
-		<iframe id="adminFrm" style="border: 0px;" width="100%" height="450px"></iframe>
+		<iframe id="adminFrm" style="border: 0px;" width="100%" height="600px"></iframe>
 	</div>
 	<div id="win" style="padding: 20px;">
 		<form id="ff" method="post">
