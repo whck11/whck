@@ -7,65 +7,75 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="/common/meta.jsp"%>
 <%@include file="/common/easyui.jsp"%>
+<script src="${contextPath }/js/user/list.js"></script>
 </head>
 <body>
-	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-			<button class="btn btn-default">添加</button>
-			<button class="btn btn-default">修改</button>
-			<button class="btn btn-default">删除</button>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<table class="table table-striped">
-					<thead>
-						<tr>
-							<th data-options="field:'username'">登录名</th>
-							<th data-options="field:'name'">姓名</th>
-							<th data-options="field:'phone'">手机</th>
-							<th data-options="field:'cname'">公司名</th>
-							<th data-options="field:'address'">地址</th>
-						</tr>
-					</thead>
-					<tbody>
-						<c:forEach items="${content }" var="user">
-							<tr>
-								<td>${user.username }</td>
-								<td>${user.name }</td>
-								<td>${user.phone }</td>
-								<td>${user.cname }</td>
-								<td>${user.address }</td>
-							</tr>
-						</c:forEach>
-					</tbody>
-				</table>
-				<div id="pp"
-					style="background: #efefef; border: 1px solid #ccc; margin: 0px;"></div>
-			</div>
-		</div>
-	</div>
-	<script>
-		function loadTable() {
-			$('#pp')
-					.pagination(
-							{
-								total : "${totalElements}",
-								pageSize : "${pageSize}",
-								pageNumber : "${pageNumber}" + 1,
-								onSelectPage : function(pageNumber, pageSize) {
-									pageNumber = pageNumber - 1;
-									window.location = "${contextPath}/user/userList.do?pageNumber="
-											+ pageNumber
-											+ "&pageSize="
-											+ pageSize;
-								},
-								displayMsg : "显示 {from} 到 {to} 在 {total} 之间"
-							});
-		}
+	<table id="dg"></table>
+	<div id="pp"
+		style="background: #efefef; border: 1px solid #ccc; margin: 0px;"></div>
+	<script type="text/javascript">
+	function loadTable() {
+		$('#dg').datagrid(
+				{
+					url : contextPath + "/user/userListAjax.do",
+					columns : [ [ {
+						field : 'username',
+						title : '用户名',
+						width : 100
+					}, {
+						field : 'name',
+						title : '姓名',
+						width : 100
+					}, {
+						field : 'phone',
+						title : '手机',
+						width : 100
+					} ] ],
+					queryParams : {
+						pageSize : function() {
+							return $('#dg').datagrid('getPager').pagination(
+									'options').pageSize;
+						},
+						pageNumber : function() {
+							return $('#dg').datagrid('getPager').pagination(
+									'options').pageNumber - 1;
+						}
+					},
+					pagination : 'true',
+					toolbar : [ {
+						iconCls : 'icon-add',
+						text:'添加',
+						handler : function() {
+							alert('add');
+						}
+					}, '-', {
+						iconCls : 'icon-edit',
+						text:'修改',
+						handler : function() {
+							alert('修改')
+						}
+					},'-',{
+						iconCls : 'icon-remove',
+						text:'删除',
+						handler : function() {
+							alert('删除')
+						}
+					} ]
+				});
+	}
+
+	function loadPagination() {
+		$('#dg').datagrid('getPager').pagination({
+			pageSize : 10,// 每页显示的记录条数，默认为10
+			pageList : [ 5, 10, 15 ],// 可以设置每页记录条数的列表
+			beforePageText : '第',// 页数文本框前显示的汉字
+			afterPageText : '页    共 {pages} 页',
+			displayMsg : '当前显示 {from} - {to} 条记录   共 {total} 条记录',
+		})
+	}
 		$(function() {
 			loadTable();
+			loadPagination();
 		})
 	</script>
 </body>

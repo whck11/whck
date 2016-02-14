@@ -1,9 +1,14 @@
 package com.whck.dmo;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
-import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 /**
  * The persistent class for the user database table.
@@ -57,10 +62,6 @@ public class User implements Serializable {
 	private String remarks;
 
 	private Integer state;
-
-	// bi-directional many-to-one association to Zone
-	@OneToMany(mappedBy = "user")
-	private List<Zone> zones;
 
 	public User() {
 	}
@@ -167,27 +168,6 @@ public class User implements Serializable {
 
 	public void setState(Integer state) {
 		this.state = state;
-	}
-
-	public List<Zone> getZones() {
-		return this.zones;
-	}
-
-	public void setZones(List<Zone> zones) {
-		this.zones = zones;
-	}
-
-	public Zone addZone(Zone zone) {
-		getZones().add(zone);
-		zone.setUser(this);
-
-		return zone;
-	}
-
-	public Zone removeZone(Zone zone) {
-		getZones().remove(zone);
-		zone.setUser(null);
-		return zone;
 	}
 
 }
