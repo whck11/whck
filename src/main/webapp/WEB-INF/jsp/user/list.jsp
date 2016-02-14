@@ -31,6 +31,14 @@
 						field : 'phone',
 						title : '手机',
 						width : 100
+					},{
+						field : 'cname',
+						title : '公司',
+						width : 100
+					} ,{
+						field : 'address',
+						title : '地址',
+						width : 100
 					} ] ],
 					queryParams : {
 						pageSize : function() {
@@ -64,7 +72,14 @@
 						iconCls : 'icon-remove',
 						text:'删除',
 						handler : function() {
-							alert('删除')
+							var obj=$('#dg').datagrid('getSelected');
+							var url=contextPath+'/user/remove.do';
+							$.post(url,{username:obj.username},function(data){
+								if(data.success){
+									$('#dg').datagrid('reload');
+									alert('删除成功');
+								}
+							},'json');
 						}
 					} ]
 				});

@@ -54,6 +54,15 @@ public class UserController {
 		return map;
 	}
 
+	@RequestMapping("remove.do")
+	@ResponseBody
+	public Map<String, Object> remove(User user) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		this.userDao.delete(user.getUsername());
+		map.put("success", true);
+		return map;
+	}
+
 	@RequestMapping("add.do")
 	@ResponseBody
 	public Map<String, Object> add(User user) {
