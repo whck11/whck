@@ -40,6 +40,7 @@
 					</div>
 					<div>
 						<button class="btn btn-default" type="button" id="btnSave">保存</button>
+						<button class="btn btn-default" type="button" id="btnBack">返回</button>
 					</div>
 				</form>
 			</div>
@@ -72,8 +73,14 @@
 
 			});
 		}
+		function bindBack(){
+			$('#btnBack').click(function(){
+				window.location=contextPath+'/user/userList.do'
+			});
+		}
 		$(function() {
 			bindSave();
+			bindBack();
 		})
 	</script>
 </body>

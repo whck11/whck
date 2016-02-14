@@ -7,12 +7,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%@include file="/common/meta.jsp"%>
 <%@include file="/common/easyui.jsp"%>
-<script src="${contextPath }/js/user/list.js"></script>
 </head>
 <body>
 	<table id="dg"></table>
-	<div id="pp"
-		style="background: #efefef; border: 1px solid #ccc; margin: 0px;"></div>
 	<script type="text/javascript">
 	function loadTable() {
 		$('#dg').datagrid(
