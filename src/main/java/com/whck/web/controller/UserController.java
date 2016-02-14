@@ -1,5 +1,6 @@
 package com.whck.web.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.ctc.wstx.util.StringUtil;
 import com.whck.dao.UserDao;
 import com.whck.dmo.User;
 
@@ -26,9 +28,34 @@ public class UserController {
 		return "user/list";
 	}
 
+	@RequestMapping("addPage.do")
+	public String addPage() {
+		return "user/add";
+	}
+
+	@RequestMapping("add.do")
+	@ResponseBody
+	public Map<String, Object> add(User user) {
+		Map<String, Object> map = new HashMap<>();
+		if (user.getUsername() == null || StringUtil.isAllWhitespace(user.getUsername())) {
+			map.put("msg", "邮箱不能为空");
+			return map;
+		}
+		if (this.userDao.findOne(user.getUsername()) != null) {
+			map.put("msg", "该邮箱已被使用");
+			return map;
+		}
+		user.setRegDate(new Date());
+		user.setPassword("000000");
+		this.userDao.save(user);
+		map.put("success", true);
+		map.put("msg", "初始密码为000000");
+		return map;
+	}
+
 	@RequestMapping("userListAjax.do")
 	@ResponseBody
-	public Map<String, Object> userListAjax(HttpServletRequest request,int pageNumber, int pageSize) {
+	public Map<String, Object> userListAjax(HttpServletRequest request, int pageNumber, int pageSize) {
 		Map<String, Object> map = new HashMap<>();
 		Page<User> pageList = this.userDao.findAll(new PageRequest(pageNumber, pageSize));
 		map.put("rows", pageList.getContent());

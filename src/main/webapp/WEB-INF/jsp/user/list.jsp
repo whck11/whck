@@ -46,7 +46,7 @@
 						iconCls : 'icon-add',
 						text:'添加',
 						handler : function() {
-							alert('add');
+							window.location=contextPath+'/user/addPage.do';
 						}
 					}, '-', {
 						iconCls : 'icon-edit',
