@@ -18,6 +18,7 @@
 		$('#dg').datagrid(
 				{
 					url : contextPath + "/user/userListAjax.do",
+					singleSelect:true,
 					columns : [ [ {
 						field : 'username',
 						title : '用户名',
@@ -52,7 +53,12 @@
 						iconCls : 'icon-edit',
 						text:'修改',
 						handler : function() {
-							alert('修改')
+							var obj=$('#dg').datagrid('getSelected');
+							if(obj){
+								window.location=contextPath+'/user/updatePage.do?username='+obj.username;
+							}else{
+								alert('请选中一行');
+							}
 						}
 					},'-',{
 						iconCls : 'icon-remove',

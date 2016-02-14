@@ -33,6 +33,27 @@ public class UserController {
 		return "user/add";
 	}
 
+	@RequestMapping("updatePage.do")
+	public String updatePage(String username, HttpServletRequest request) {
+		request.setAttribute("user", this.userDao.findOne(username));
+		return "user/update";
+	}
+
+	@RequestMapping("update.do")
+	@ResponseBody
+	public Map<String, Object> update(User user) {
+		Map<String, Object> map = new HashMap<>();
+		User data = this.userDao.findOne(user.getUsername());
+		data.setAddress(user.getAddress());
+		data.setPhone(user.getPhone());
+		data.setCname(user.getCname());
+		data.setName(user.getName());
+		data.setRemarks(user.getRemarks());
+		userDao.save(data);
+		map.put("result", true);
+		return map;
+	}
+
 	@RequestMapping("add.do")
 	@ResponseBody
 	public Map<String, Object> add(User user) {
