@@ -9,48 +9,56 @@
 <%@include file="/common/easyui.jsp"%>
 </head>
 <body>
-	<table class="easyui-datagrid">
-		<thead>
-			<tr>
-				<th data-options="field:'username'">登录名</th>
-				<th data-options="field:'name'">姓名</th>
-				<th data-options="field:'phone'">手机</th>
-				<th data-options="field:'cname'">公司名</th>
-				<th data-options="field:'address'">地址</th>
-			</tr>
-		</thead>
-		<tbody>
-			<c:forEach items="${content }" var="user">
-				<tr>
-					<td>${user.username }</td>
-					<td>${user.name }</td>
-					<td>${user.phone }</td>
-					<td>${user.cname }</td>
-					<td>${user.address }</td>
-				</tr>
-			</c:forEach>
-		</tbody>
-	</table>
-	<div id="pp" style="background: #efefef; border: 1px solid #ccc;margin: 0px;"></div>
-	<script >
-	function loadTable() {
-		$('#pp')
-				.pagination(
-						{
-							total : "${totalElements}",
-							pageSize : "${pageSize}",
-							pageNumber : "${pageNumber}" + 1,
-							onSelectPage : function(pageNumber, pageSize) {
-								pageNumber = pageNumber - 1;
-								window.location = "${contextPath}/user/userList.do?pageNumber="
-										+ pageNumber + "&pageSize=" + pageSize;
-							},
-							displayMsg : "显示 {from} 到 {to} 在 {total} 之间"
-						});
-	}
-	$(function() {
-		loadTable();
-	})
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th data-options="field:'username'">登录名</th>
+							<th data-options="field:'name'">姓名</th>
+							<th data-options="field:'phone'">手机</th>
+							<th data-options="field:'cname'">公司名</th>
+							<th data-options="field:'address'">地址</th>
+						</tr>
+					</thead>
+					<tbody>
+						<c:forEach items="${content }" var="user">
+							<tr>
+								<td>${user.username }</td>
+								<td>${user.name }</td>
+								<td>${user.phone }</td>
+								<td>${user.cname }</td>
+								<td>${user.address }</td>
+							</tr>
+						</c:forEach>
+					</tbody>
+				</table>
+				<div id="pp"
+					style="background: #efefef; border: 1px solid #ccc; margin: 0px;"></div>
+			</div>
+		</div>
+	</div>
+	<script>
+		function loadTable() {
+			$('#pp').pagination(
+							{
+								total : "${totalElements}",
+								pageSize : "${pageSize}",
+								pageNumber : "${pageNumber}" + 1,
+								onSelectPage : function(pageNumber, pageSize) {
+									pageNumber = pageNumber - 1;
+									window.location = "${contextPath}/user/userList.do?pageNumber="
+											+ pageNumber
+											+ "&pageSize="
+											+ pageSize;
+								},
+								displayMsg : "显示 {from} 到 {to} 在 {total} 之间"
+							});
+		}
+		$(function() {
+			loadTable();
+		})
 	</script>
 </body>
 </html>
