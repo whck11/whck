@@ -10,43 +10,35 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+
 /**
  * The persistent class for the user database table.
  * 
  */
 @Entity
-@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
+@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private String username;
 
-	@Column(name = "activate_code")
+	@Column(name="activate_code")
 	private String activateCode;
 
 	private String address;
-	@Column(name = "is_admin")
-	private Boolean isAdmin;
-
-	public Boolean getIsAdmin() {
-		return isAdmin;
-	}
-
-	public void setIsAdmin(Boolean isAdmin) {
-		this.isAdmin = isAdmin;
-	}
 
 	private String cname;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "cncl_date")
+	@Column(name="cncl_date")
 	private Date cnclDate;
 
-	private Integer level;
+	@Column(name="is_admin")
+	private Boolean isAdmin;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "logon_date")
+	@Column(name="logon_date")
 	private Date logonDate;
 
 	private String name;
@@ -56,7 +48,7 @@ public class User implements Serializable {
 	private String phone;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name = "reg_date")
+	@Column(name="reg_date")
 	private Date regDate;
 
 	private String remarks;
@@ -106,12 +98,12 @@ public class User implements Serializable {
 		this.cnclDate = cnclDate;
 	}
 
-	public Integer getLevel() {
-		return this.level;
+	public Boolean getIsAdmin() {
+		return this.isAdmin;
 	}
 
-	public void setLevel(Integer level) {
-		this.level = level;
+	public void setIsAdmin(Boolean isAdmin) {
+		this.isAdmin = isAdmin;
 	}
 
 	public Date getLogonDate() {

@@ -15,9 +15,8 @@ public class Zone implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="zone_id")
-	private Integer zoneId;
+	private int zoneId;
 
 	private double area;
 
@@ -30,9 +29,9 @@ public class Zone implements Serializable {
 	@Column(name="zone_name")
 	private String zoneName;
 
-	//bi-directional many-to-one association to Device
+	//bi-directional many-to-one association to Dc
 	@OneToMany(mappedBy="zone")
-	private List<Device> devices;
+	private List<Dc> dcs;
 
 	//bi-directional many-to-one association to User
 	@ManyToOne
@@ -42,11 +41,11 @@ public class Zone implements Serializable {
 	public Zone() {
 	}
 
-	public Integer getZoneId() {
+	public int getZoneId() {
 		return this.zoneId;
 	}
 
-	public void setZoneId(Integer zoneId) {
+	public void setZoneId(int zoneId) {
 		this.zoneId = zoneId;
 	}
 
@@ -90,27 +89,26 @@ public class Zone implements Serializable {
 		this.zoneName = zoneName;
 	}
 
-
-	public List<Device> getDevices() {
-		return this.devices;
+	public List<Dc> getDcs() {
+		return this.dcs;
 	}
 
-	public void setDevices(List<Device> devices) {
-		this.devices = devices;
+	public void setDcs(List<Dc> dcs) {
+		this.dcs = dcs;
 	}
 
-	public Device addDevice(Device device) {
-		getDevices().add(device);
-		device.setZone(this);
+	public Dc addDc(Dc dc) {
+		getDcs().add(dc);
+		dc.setZone(this);
 
-		return device;
+		return dc;
 	}
 
-	public Device removeDevice(Device device) {
-		getDevices().remove(device);
-		device.setZone(null);
+	public Dc removeDc(Dc dc) {
+		getDcs().remove(dc);
+		dc.setZone(null);
 
-		return device;
+		return dc;
 	}
 
 	public User getUser() {

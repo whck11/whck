@@ -2,6 +2,7 @@ package com.whck.dmo;
 
 import java.io.Serializable;
 import javax.persistence.*;
+import java.util.Date;
 
 
 /**
@@ -14,9 +15,12 @@ public class Variable implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="variable_id")
-	private Integer variableId;
+	private int variableId;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="end_time")
+	private Date endTime;
 
 	@Column(name="max_value")
 	private double maxValue;
@@ -26,12 +30,19 @@ public class Variable implements Serializable {
 
 	private String name;
 
-	private int type;
+	@Column(name="run_time")
+	private int runTime;
+
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="start_time")
+	private Date startTime;
+
+	@Column(name="stop_time")
+	private int stopTime;
 
 	private String unit;
 
-	@Column(name="var_set")
-	private byte varSet;
+	private double value;
 
 	//bi-directional many-to-one association to Device
 	@ManyToOne
@@ -41,12 +52,20 @@ public class Variable implements Serializable {
 	public Variable() {
 	}
 
-	public Integer getVariableId() {
+	public int getVariableId() {
 		return this.variableId;
 	}
 
-	public void setVariableId(Integer variableId) {
+	public void setVariableId(int variableId) {
 		this.variableId = variableId;
+	}
+
+	public Date getEndTime() {
+		return this.endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
 	}
 
 	public double getMaxValue() {
@@ -73,12 +92,28 @@ public class Variable implements Serializable {
 		this.name = name;
 	}
 
-	public int getType() {
-		return this.type;
+	public int getRunTime() {
+		return this.runTime;
 	}
 
-	public void setType(int type) {
-		this.type = type;
+	public void setRunTime(int runTime) {
+		this.runTime = runTime;
+	}
+
+	public Date getStartTime() {
+		return this.startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	public int getStopTime() {
+		return this.stopTime;
+	}
+
+	public void setStopTime(int stopTime) {
+		this.stopTime = stopTime;
 	}
 
 	public String getUnit() {
@@ -89,12 +124,12 @@ public class Variable implements Serializable {
 		this.unit = unit;
 	}
 
-	public byte getVarSet() {
-		return this.varSet;
+	public double getValue() {
+		return this.value;
 	}
 
-	public void setVarSet(byte varSet) {
-		this.varSet = varSet;
+	public void setValue(double value) {
+		this.value = value;
 	}
 
 	public Device getDevice() {

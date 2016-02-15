@@ -15,25 +15,29 @@ public class Device implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="device_id")
-	private Integer deviceId;
+	private int deviceId;
 
 	@Column(name="ctrl_mode")
-	private Integer ctrlMode;
+	private int ctrlMode;
 
 	@Column(name="ctrl_way")
-	private Integer ctrlWay;
+	private int ctrlWay;
+
+	@Lob
+	private String description;
 
 	@Column(name="device_name")
 	private String deviceName;
 
 	private String ip;
 
-	//bi-directional many-to-one association to Zone
+	private int state;
+
+	//bi-directional many-to-one association to Dc
 	@ManyToOne
-	@JoinColumn(name="zone_id")
-	private Zone zone;
+	@JoinColumn(name="dc_id")
+	private Dc dc;
 
 	//bi-directional many-to-one association to Variable
 	@OneToMany(mappedBy="device")
@@ -42,28 +46,36 @@ public class Device implements Serializable {
 	public Device() {
 	}
 
-	public Integer getDeviceId() {
+	public int getDeviceId() {
 		return this.deviceId;
 	}
 
-	public void setDeviceId(Integer deviceId) {
+	public void setDeviceId(int deviceId) {
 		this.deviceId = deviceId;
 	}
 
-	public Integer getCtrlMode() {
+	public int getCtrlMode() {
 		return this.ctrlMode;
 	}
 
-	public void setCtrlMode(Integer ctrlMode) {
+	public void setCtrlMode(int ctrlMode) {
 		this.ctrlMode = ctrlMode;
 	}
 
-	public Integer getCtrlWay() {
+	public int getCtrlWay() {
 		return this.ctrlWay;
 	}
 
-	public void setCtrlWay(Integer ctrlWay) {
+	public void setCtrlWay(int ctrlWay) {
 		this.ctrlWay = ctrlWay;
+	}
+
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getDeviceName() {
@@ -82,13 +94,20 @@ public class Device implements Serializable {
 		this.ip = ip;
 	}
 
-
-	public Zone getZone() {
-		return this.zone;
+	public int getState() {
+		return this.state;
 	}
 
-	public void setZone(Zone zone) {
-		this.zone = zone;
+	public void setState(int state) {
+		this.state = state;
+	}
+
+	public Dc getDc() {
+		return this.dc;
+	}
+
+	public void setDc(Dc dc) {
+		this.dc = dc;
 	}
 
 	public List<Variable> getVariables() {

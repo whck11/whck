@@ -16,7 +16,7 @@
 	</context:component-scan>
 
 	<util:properties id="dataSourceInfo">
-		<prop key="url">jdbc:mysql://192.168.1.115/whck</prop>
+		<prop key="url">jdbc:mysql://192.168.1.129/whck</prop>
 		<prop key="username">admin</prop>
 		<prop key="password">123456</prop>
 		<prop key="driverClassName">com.mysql.jdbc.Driver</prop>

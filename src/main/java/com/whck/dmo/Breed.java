@@ -15,9 +15,8 @@ public class Breed implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	@Column(name="breed_id")
-	private Integer breedId;
+	private int breedId;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="birth_time")
@@ -26,25 +25,28 @@ public class Breed implements Serializable {
 	@Column(name="breed_name")
 	private String breedName;
 
+	@Lob
+	private String description;
+
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="harvest_time")
 	private Date harvestTime;
 
-	private int number;
+	private double number;
 
 	private String unit;
 
 	@Column(name="zone_id")
-	private Integer zoneId;
+	private int zoneId;
 
 	public Breed() {
 	}
 
-	public Integer getBreedId() {
+	public int getBreedId() {
 		return this.breedId;
 	}
 
-	public void setBreedId(Integer breedId) {
+	public void setBreedId(int breedId) {
 		this.breedId = breedId;
 	}
 
@@ -64,6 +66,14 @@ public class Breed implements Serializable {
 		this.breedName = breedName;
 	}
 
+	public String getDescription() {
+		return this.description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public Date getHarvestTime() {
 		return this.harvestTime;
 	}
@@ -72,11 +82,11 @@ public class Breed implements Serializable {
 		this.harvestTime = harvestTime;
 	}
 
-	public int getNumber() {
+	public double getNumber() {
 		return this.number;
 	}
 
-	public void setNumber(int number) {
+	public void setNumber(double number) {
 		this.number = number;
 	}
 
@@ -88,11 +98,11 @@ public class Breed implements Serializable {
 		this.unit = unit;
 	}
 
-	public Integer getZoneId() {
+	public int getZoneId() {
 		return this.zoneId;
 	}
 
-	public void setZoneId(Integer zoneId) {
+	public void setZoneId(int zoneId) {
 		this.zoneId = zoneId;
 	}
 
