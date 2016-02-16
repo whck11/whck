@@ -40,8 +40,13 @@
 				</p>
 			</div>
 			<div title="区域管理"
-				data-options="iconCls:'icon-reload',selected:true"
-				style="padding: 10px;"></div>
+				data-options="iconCls:'icon-large-clipart',selected:true"
+				style="padding: 10px;">
+			<p>
+				<a href="javascript:void(0)" onclick="setFrm(this)"
+						data-url="${contextPath }/zone/main.do">区域列表</a>
+			</p>
+			</div>
 		</div>
 	</div>
 	<div data-options="region:'center'"

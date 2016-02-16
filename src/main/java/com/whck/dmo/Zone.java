@@ -1,24 +1,28 @@
 package com.whck.dmo;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.List;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
 /**
  * The persistent class for the zone database table.
  * 
  */
 @Entity
-@NamedQuery(name="Zone.findAll", query="SELECT z FROM Zone z")
+@NamedQuery(name = "Zone.findAll", query = "SELECT z FROM Zone z")
 public class Zone implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="zone_id")
+	@Column(name = "zone_id")
 	private int zoneId;
 
-	private double area;
+	private Double area;
 
 	private String latitude;
 
@@ -26,16 +30,12 @@ public class Zone implements Serializable {
 
 	private String remarks;
 
-	@Column(name="zone_name")
+	@Column(name = "zone_name")
 	private String zoneName;
 
-	//bi-directional many-to-one association to Dc
-	@OneToMany(mappedBy="zone")
-	private List<Dc> dcs;
-
-	//bi-directional many-to-one association to User
+	// bi-directional many-to-one association to User
 	@ManyToOne
-	@JoinColumn(name="user_id")
+	@JoinColumn(name = "user_id")
 	private User user;
 
 	public Zone() {
@@ -49,11 +49,11 @@ public class Zone implements Serializable {
 		this.zoneId = zoneId;
 	}
 
-	public double getArea() {
+	public Double getArea() {
 		return this.area;
 	}
 
-	public void setArea(double area) {
+	public void setArea(Double area) {
 		this.area = area;
 	}
 
@@ -87,28 +87,6 @@ public class Zone implements Serializable {
 
 	public void setZoneName(String zoneName) {
 		this.zoneName = zoneName;
-	}
-
-	public List<Dc> getDcs() {
-		return this.dcs;
-	}
-
-	public void setDcs(List<Dc> dcs) {
-		this.dcs = dcs;
-	}
-
-	public Dc addDc(Dc dc) {
-		getDcs().add(dc);
-		dc.setZone(this);
-
-		return dc;
-	}
-
-	public Dc removeDc(Dc dc) {
-		getDcs().remove(dc);
-		dc.setZone(null);
-
-		return dc;
 	}
 
 	public User getUser() {
