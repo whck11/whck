@@ -47,11 +47,6 @@ public class ZoneController {
 	@Autowired
 	private UserDao userDao;
 
-	@RequestMapping("updatePage.do")
-	public String updatePage() {
-		return "zone/update";
-	}
-
 	@RequestMapping("add.do")
 	@ResponseBody
 	public Map<String, Object> add(String zoneName, Double area, String longitude, String latitude, String remarks,
@@ -63,12 +58,46 @@ public class ZoneController {
 		zone.setLongitude(longitude);
 		zone.setRemarks(remarks);
 		zone.setZoneName(zoneName);
-		if (null != username && !username.trim().equals("")) {
-			User user = this.userDao.findByUsername(username);
-			zone.setUser(user);
-		}
+		User user = this.userDao.findByUsername(username);
+		zone.setUser(user);
 		this.zoneDao.save(zone);
 		map.put("success", true);
 		return map;
 	}
+
+	@RequestMapping("updatePage.do")
+	public String updatePage(Integer zoneId, HttpServletRequest request) {
+		Zone zone = this.zoneDao.findOne(zoneId);
+		request.setAttribute("zone", zone);
+		return "zone/update";
+	}
+
+	@RequestMapping("update.do")
+	@ResponseBody
+	public Map<String, Object> update(Integer zoneId, String zoneName, String latitude, String longitude, Double area,
+			String remarks, String username) {
+		Map<String, Object> map = new HashMap<>();
+		Zone data = this.zoneDao.findOne(zoneId);
+		data.setZoneName(zoneName);
+		data.setArea(area);
+		data.setLatitude(latitude);
+		data.setLongitude(longitude);
+		data.setRemarks(remarks);
+		if (null != username && username.length() != 0) {
+			data.setUser(userDao.findByUsername(username));
+		}
+		zoneDao.save(data);
+		map.put("result", true);
+		return map;
+	}
+
+	@RequestMapping("remove.do")
+	@ResponseBody
+	public Map<String, Object> remove(Zone zone) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		this.zoneDao.delete(zone.getZoneId());
+		map.put("success", true);
+		return map;
+	}
+
 }

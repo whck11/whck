@@ -85,7 +85,7 @@
 						handler : function() {
 							var obj=$('#dg').datagrid('getSelected');
 							var url=contextPath+'/zone/remove.do';
-							$.post(url,{username:obj.username},function(data){
+							$.post(url,{zoneId:obj.zoneId},function(data){
 								if(data.success){
 									$('#dg').datagrid('reload');
 									alert('删除成功');
