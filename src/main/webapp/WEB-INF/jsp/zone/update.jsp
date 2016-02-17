@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+	pageEncoding="UTF-8"%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -8,47 +8,58 @@
 <%@include file="/common/easyui.jsp"%>
 </head>
 <body>
-<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<form id="ff" method="post">
-					<div>
-						<label for="zoneId">地区ID:</label> <input class="easyui-validatebox"
-							type="text" name="zoneId" 
-							value="${zone.zoneId }" readonly="readonly"/>
+	<div class="container">
+		<form id="ff">
+			<div class="row">
+				<div class=col-md-5>
+					<div class="form-group">
+						<label for="zoneId">ID</label> <input name="zoneId"
+							class="form-control" value="${zone.zoneId }" readonly="readonly">
 					</div>
-					<div>
-						<label for="zoneName">地区名:</label> <input class="easyui-validatebox"
-							type="text" name="zoneName" 
-							value="${zone.zoneName }" />
-					</div>
-					<div>
-						<label for="area">面积:</label> <input class="easyui-numberbox"
-							type="text" name="area" value="${zone.area }" />
-					</div>
-					<div>
-						<label for="longitude">经度:</label> <input class="easyui-validatebox"
-							type="text" name="longitude" value="${zone.longitude }" />
-					</div>
-					<div>
-						<label for="latitude">纬度:</label> <input class="easyui-validatebox"
-							type="text" name="latitude" value="${zone.latitude }" />
-					</div>
-					<div>
-						<label for="remarks">备注:</label> <input class="easyui-validatebox"
-							type="text" name="remarks" value="${zone.remarks }" />
-					</div>
-					<div>
-						<label for="username">用户名:</label> <input class="easyui-validatebox"
-							type="text" name="username" value="${zone.user.username}" />
-					</div>
-					<div>
-						<button class="btn btn-default" type="button" id="btnSave">保存</button>
-						<button class="btn btn-default" type="button" id="btnBack">返回</button>
-					</div>
-				</form>
+				</div>
 			</div>
-		</div>
+			<div class="row">
+				<div class="col-md-5">
+					<div class="form-group">
+						<label for="zoneName">区域名称</label> <input type="text"
+							class="form-control" name="zoneName" placeholder="区域名称"
+							value="${zone.zoneName }">
+					</div>
+					<div class="form-group">
+						<label for="area">面积</label> <input type="number"
+							class="form-control" name="area" placeholder="面积"
+							value="${zone.area }">
+					</div>
+					<div class="form-group">
+						<label for="longitude">经度</label> <input type="text"
+							class="form-control" name="longitude" placeholder="经度"
+							value="${zone.longitude }">
+					</div>
+				</div>
+				<div class="col-md-5">
+					<div class="form-group">
+						<label for="latitude">纬度</label> <input type="text"
+							class="form-control" name="latitude" placeholder="纬度"
+							value="${zone.latitude }">
+					</div>
+					<div class="form-group">
+						<label for="remarks">备注</label> <input type="text"
+							class="form-control" name="remarks" placeholder="备注"
+							value="${zone.remarks }">
+					</div>
+					<div class="form-group">
+						<label for="username">管理员ID</label> <input type="text"
+							class="form-control" name="username" placeholder="管理员ID"
+							value="${zone.user.username }">
+					</div>
+
+				</div>
+				<div class="col-md-12">
+					<button type="button" class="btn btn-default" id="btnSave">确定</button>
+					<button type="button" class="btn btn-default" id="btnBack">取消</button>
+				</div>
+			</div>
+		</form>
 	</div>
 	<script type="text/javascript">
 		function bindSave() {
@@ -73,9 +84,9 @@
 				$('#ff').submit();
 			});
 		}
-		function bindBack(){
-			$('#btnBack').click(function(){
-				window.location=contextPath+'/zone/main.do';
+		function bindBack() {
+			$('#btnBack').click(function() {
+				window.location = contextPath + '/zone/main.do';
 			});
 		}
 		$(function() {
