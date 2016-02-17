@@ -61,7 +61,6 @@
 				username : $('#username').val()
 			}
 			var url = contextPath + '/zone/add.do';
-			alert(params.username);
 			$.post(url, params, function(data) {
 				if (data.success) {
 					alert('添加成功');

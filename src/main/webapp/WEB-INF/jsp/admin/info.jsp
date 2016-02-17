@@ -10,39 +10,43 @@
 <body>
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12">
-				<form id="ff" method="post">
-					<div>
+			<form id="ff" method="post">
+				<div class="col-md-5">
+					<div class="form-group">
 						<label for="username">登录名:</label> <input
-							class="easyui-validatebox" type="text" name="username"
-							readonly="readonly" value="${LOGIN_SESSION_DATA.username }" />
+							class="easyui-validatebox form-control" type="text"
+							name="username" readonly="readonly" value="${LOGIN_SESSION_DATA.username }" />
 					</div>
-					<div>
-						<label for="name">姓名:</label> <input class="easyui-validatebox"
-							type="text" name="name" data-options="required:true"
-							value="${LOGIN_SESSION_DATA.name }" />
+					<div class="form-group">
+						<label for="name">姓名:</label> <input
+							class="easyui-validatebox form-control" type="text" name="name"
+							data-options="required:true" value="${LOGIN_SESSION_DATA.name }" />
 					</div>
-					<div>
-						<label for="phone">手机:</label> <input class="easyui-numberbox"
-							type="text" name="phone" value="${LOGIN_SESSION_DATA.phone }" />
+					<div class="form-group">
+						<label for="phone">手机:</label> <input
+							class="form-control" type="number" name="phone"
+							value="${LOGIN_SESSION_DATA.phone }" />
 					</div>
-					<div>
-						<label for="address">地址:</label> <input class="easyui-validatebox"
+				</div>
+				<div class="col-md-5">
+					<div class="form-group">
+						<label for="address">地址:</label> <input class="form-control"
 							type="text" name="address" value="${LOGIN_SESSION_DATA.address }" />
 					</div>
-					<div>
-						<label for="cname">公司:</label> <input class="easyui-validatebox"
+					<div class="form-group">
+						<label for="cname">公司:</label> <input class="form-control"
 							type="text" name="cname" value="${LOGIN_SESSION_DATA.cname }" />
 					</div>
-					<div>
-						<label for="remarks">备注:</label> <input class="easyui-validatebox"
+					<div class="form-group">
+						<label for="remarks">备注:</label> <input class="form-control"
 							type="text" name="remarks" value="${LOGIN_SESSION_DATA.remarks }" />
 					</div>
-					<div>
-						<button class="btn btn-default" type="button" id="btnSave">保存</button>
-					</div>
-				</form>
-			</div>
+				</div>
+
+				<div class="col-md-12">
+					<button class="btn btn-default" type="button" id="btnSave">保存</button>
+				</div>
+			</form>
 		</div>
 	</div>
 	<script type="text/javascript">

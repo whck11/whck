@@ -75,7 +75,7 @@
 		}
 		function bindBack(){
 			$('#btnBack').click(function(){
-				window.location=contextPath+'/zone/main.do'
+				window.location=contextPath+'/zone/main.do';
 			});
 		}
 		$(function() {
