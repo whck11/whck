@@ -11,9 +11,19 @@ import org.springframework.stereotype.Component;
 import com.whck.dmo.Dc;
 import com.whck.dmo.Device;
 
+/**
+ * 
+ * @author 马健原 2016-2-18
+ *
+ */
 @Component
 public class SocketAnalysis {
-
+	/**
+	 * 
+	 * @param str
+	 *            从字符串中解析出Device对象
+	 * @return
+	 */
 	public Device getDevice(String str) {
 		Device device = new Device();
 		int index = str.indexOf("<IP>");
@@ -33,9 +43,35 @@ public class SocketAnalysis {
 			dc.setId(id);
 			device.setDc(dc);
 		}
+		index = str.indexOf("<DESCRIPTION>");
+		if (index >= 0) {
+			String description = str.substring(index + 13, str.indexOf("</DESCRIPTION>"));
+			device.setDescription(description);
+		}
+		index = str.indexOf("<CTRL_WAY>");
+		if (index >= 0) {
+			String ctrlWay = str.substring(index + 10, str.indexOf("</CTRL_WAY>"));
+			device.setCtrlWay(Integer.valueOf(ctrlWay.trim()));
+		}
+		index = str.indexOf("<CTRL_MODE>");
+		if (index >= 0) {
+			String ctrlMode = str.substring(index + 11, str.indexOf("</CTRL_MODE>"));
+			device.setCtrlMode(Integer.valueOf(ctrlMode.trim()));
+		}
+		index = str.indexOf("<STATE>");
+		if (index >= 0) {
+			String state = str.substring(index + 7, str.indexOf("</STATE>"));
+			device.setState(Integer.valueOf(state));
+		}
 		return device;
 	}
 
+	/**
+	 * 
+	 * @param socket
+	 *            获取输入流中的字符串
+	 * @return
+	 */
 	public String getString(Socket socket) {
 		StringBuilder builder = new StringBuilder();
 		BufferedReader reader = this.getReader(socket);
@@ -50,6 +86,12 @@ public class SocketAnalysis {
 		return builder.toString();
 	}
 
+	/**
+	 * 
+	 * @param socket
+	 *            获取套接字的输入流
+	 * @return
+	 */
 	public BufferedReader getReader(Socket socket) {
 		BufferedReader reader = null;
 		try {
@@ -60,6 +102,11 @@ public class SocketAnalysis {
 		return reader;
 	}
 
+	/**
+	 * 
+	 * @param socket获取套接字的输出流
+	 * @return
+	 */
 	public PrintWriter getWriter(Socket socket) {
 		PrintWriter printWriter = null;
 		try {

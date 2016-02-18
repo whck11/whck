@@ -17,7 +17,12 @@ import com.whck.dao.DcDao;
 import com.whck.dao.DeviceDao;
 import com.whck.dmo.Device;
 import com.whck.util.SocketAnalysis;
-
+/**
+ * 
+ * @author 马健原
+ * 2016-2-18
+ *套接字服务器的端口为9090
+ */
 @Service
 @Transactional
 public class DeviceServiceImpl implements DeviceService, Runnable {
