@@ -1,8 +1,16 @@
 package com.whck.dmo;
 
 import java.io.Serializable;
-import javax.persistence.*;
-import java.util.List;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 
 
 /**
@@ -16,13 +24,14 @@ public class Device implements Serializable {
 
 	@Id
 	@Column(name="device_id")
-	private int deviceId;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer deviceId;
 
 	@Column(name="ctrl_mode")
-	private int ctrlMode;
+	private Integer ctrlMode;
 
 	@Column(name="ctrl_way")
-	private int ctrlWay;
+	private Integer ctrlWay;
 
 	@Lob
 	private String description;
@@ -32,41 +41,37 @@ public class Device implements Serializable {
 
 	private String ip;
 
-	private int state;
+	private Integer state;
 
 	//bi-directional many-to-one association to Dc
 	@ManyToOne
 	@JoinColumn(name="dc_id")
 	private Dc dc;
 
-	//bi-directional many-to-one association to Variable
-	@OneToMany(mappedBy="device")
-	private List<Variable> variables;
-
 	public Device() {
 	}
 
-	public int getDeviceId() {
+	public Integer getDeviceId() {
 		return this.deviceId;
 	}
 
-	public void setDeviceId(int deviceId) {
+	public void setDeviceId(Integer deviceId) {
 		this.deviceId = deviceId;
 	}
 
-	public int getCtrlMode() {
+	public Integer getCtrlMode() {
 		return this.ctrlMode;
 	}
 
-	public void setCtrlMode(int ctrlMode) {
+	public void setCtrlMode(Integer ctrlMode) {
 		this.ctrlMode = ctrlMode;
 	}
 
-	public int getCtrlWay() {
+	public Integer getCtrlWay() {
 		return this.ctrlWay;
 	}
 
-	public void setCtrlWay(int ctrlWay) {
+	public void setCtrlWay(Integer ctrlWay) {
 		this.ctrlWay = ctrlWay;
 	}
 
@@ -94,11 +99,11 @@ public class Device implements Serializable {
 		this.ip = ip;
 	}
 
-	public int getState() {
+	public Integer getState() {
 		return this.state;
 	}
 
-	public void setState(int state) {
+	public void setState(Integer state) {
 		this.state = state;
 	}
 
@@ -110,26 +115,5 @@ public class Device implements Serializable {
 		this.dc = dc;
 	}
 
-	public List<Variable> getVariables() {
-		return this.variables;
-	}
-
-	public void setVariables(List<Variable> variables) {
-		this.variables = variables;
-	}
-
-	public Variable addVariable(Variable variable) {
-		getVariables().add(variable);
-		variable.setDevice(this);
-
-		return variable;
-	}
-
-	public Variable removeVariable(Variable variable) {
-		getVariables().remove(variable);
-		variable.setDevice(null);
-
-		return variable;
-	}
 
 }

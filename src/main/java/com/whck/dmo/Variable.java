@@ -1,8 +1,18 @@
 package com.whck.dmo;
 
 import java.io.Serializable;
-import javax.persistence.*;
 import java.util.Date;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -16,7 +26,8 @@ public class Variable implements Serializable {
 
 	@Id
 	@Column(name="variable_id")
-	private int variableId;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer variableId;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="end_time")
@@ -31,14 +42,14 @@ public class Variable implements Serializable {
 	private String name;
 
 	@Column(name="run_time")
-	private int runTime;
+	private Integer runTime;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="start_time")
 	private Date startTime;
 
 	@Column(name="stop_time")
-	private int stopTime;
+	private Integer stopTime;
 
 	private String unit;
 
@@ -52,11 +63,11 @@ public class Variable implements Serializable {
 	public Variable() {
 	}
 
-	public int getVariableId() {
+	public Integer getVariableId() {
 		return this.variableId;
 	}
 
-	public void setVariableId(int variableId) {
+	public void setVariableId(Integer variableId) {
 		this.variableId = variableId;
 	}
 
@@ -92,11 +103,11 @@ public class Variable implements Serializable {
 		this.name = name;
 	}
 
-	public int getRunTime() {
+	public Integer getRunTime() {
 		return this.runTime;
 	}
 
-	public void setRunTime(int runTime) {
+	public void setRunTime(Integer runTime) {
 		this.runTime = runTime;
 	}
 
@@ -108,11 +119,11 @@ public class Variable implements Serializable {
 		this.startTime = startTime;
 	}
 
-	public int getStopTime() {
+	public Integer getStopTime() {
 		return this.stopTime;
 	}
 
-	public void setStopTime(int stopTime) {
+	public void setStopTime(Integer stopTime) {
 		this.stopTime = stopTime;
 	}
 

@@ -4,37 +4,37 @@ import java.io.Serializable;
 import javax.persistence.*;
 import java.util.List;
 
-
 /**
  * The persistent class for the dc database table.
  * 
  */
 @Entity
-@NamedQuery(name="Dc.findAll", query="SELECT d FROM Dc d")
+@NamedQuery(name = "Dc.findAll", query = "SELECT d FROM Dc d")
 public class Dc implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	private String DC_id;
+	@Column(name = "DC_ID")
+	private String id;
 
-	//bi-directional many-to-one association to Zone
+	// bi-directional many-to-one association to Zone
 	@ManyToOne
-	@JoinColumn(name="zone_id")
+	@JoinColumn(name = "zone_id")
 	private Zone zone;
 
-	//bi-directional many-to-one association to Device
-	@OneToMany(mappedBy="dc")
+	// bi-directional many-to-one association to Device
+	@OneToMany(mappedBy = "dc")
 	private List<Device> devices;
 
 	public Dc() {
 	}
 
-	public String getDC_id() {
-		return this.DC_id;
+	public String getId() {
+		return id;
 	}
 
-	public void setDC_id(String DC_id) {
-		this.DC_id = DC_id;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public Zone getZone() {

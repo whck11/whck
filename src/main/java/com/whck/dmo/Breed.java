@@ -16,7 +16,8 @@ public class Breed implements Serializable {
 
 	@Id
 	@Column(name="breed_id")
-	private int breedId;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer breedId;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="birth_time")
@@ -37,16 +38,16 @@ public class Breed implements Serializable {
 	private String unit;
 
 	@Column(name="zone_id")
-	private int zoneId;
+	private Integer zoneId;
 
 	public Breed() {
 	}
 
-	public int getBreedId() {
+	public Integer getBreedId() {
 		return this.breedId;
 	}
 
-	public void setBreedId(int breedId) {
+	public void setBreedId(Integer breedId) {
 		this.breedId = breedId;
 	}
 
@@ -98,11 +99,11 @@ public class Breed implements Serializable {
 		this.unit = unit;
 	}
 
-	public int getZoneId() {
+	public Integer getZoneId() {
 		return this.zoneId;
 	}
 
-	public void setZoneId(int zoneId) {
+	public void setZoneId(Integer zoneId) {
 		this.zoneId = zoneId;
 	}
 

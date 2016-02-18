@@ -16,7 +16,8 @@ public class Warning implements Serializable {
 
 	@Id
 	@Column(name="warning_id")
-	private int warningId;
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	private Integer warningId;
 
 	private String category;
 
@@ -31,11 +32,11 @@ public class Warning implements Serializable {
 	public Warning() {
 	}
 
-	public int getWarningId() {
+	public Integer getWarningId() {
 		return this.warningId;
 	}
 
-	public void setWarningId(int warningId) {
+	public void setWarningId(Integer warningId) {
 		this.warningId = warningId;
 	}
 
