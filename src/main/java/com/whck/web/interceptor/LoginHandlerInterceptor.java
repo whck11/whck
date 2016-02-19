@@ -18,7 +18,7 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
 		boolean rt = false;
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute(Keys.LOGIN_SESSION_DATA);
-		if (user != null && user.getIsAdmin()) {
+		if (user != null && user.getIsAdmin()==1) {
 			rt = true;
 		} else {
 			request.setAttribute(Keys.LOGIN_ERROR_TYPE, "500");

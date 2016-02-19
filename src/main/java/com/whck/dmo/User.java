@@ -35,7 +35,7 @@ public class User implements Serializable {
 	private Date cnclDate;
 
 	@Column(name="is_admin")
-	private Boolean isAdmin;
+	private Integer isAdmin;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="logon_date")
@@ -98,11 +98,11 @@ public class User implements Serializable {
 		this.cnclDate = cnclDate;
 	}
 
-	public Boolean getIsAdmin() {
+	public Integer getIsAdmin() {
 		return this.isAdmin;
 	}
 
-	public void setIsAdmin(Boolean isAdmin) {
+	public void setIsAdmin(Integer isAdmin) {
 		this.isAdmin = isAdmin;
 	}
 

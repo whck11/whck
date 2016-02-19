@@ -37,7 +37,7 @@ public class LoginController {
 	public String login(String username, String password, HttpSession session) {
 		try {
 			User user = this.userService.login(username, password);
-			if(!user.getIsAdmin()){
+			if(user.getIsAdmin()==0){
 				throw new Exception("您没有管理员权限");
 			}
 			session.setAttribute(Keys.LOGIN_SESSION_DATA, user);
