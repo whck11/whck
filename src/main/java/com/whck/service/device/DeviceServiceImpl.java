@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import javax.annotation.PostConstruct;
@@ -21,7 +22,7 @@ import com.whck.util.SocketUtil;
 
 /**
  * 
- * @author 马健原 2016-2-18 
+ * @author 马健原 2016-2-18
  */
 @Service
 @Transactional
@@ -33,14 +34,19 @@ public class DeviceServiceImpl implements DeviceService, Runnable {
 	@Autowired
 	private DeviceDao deviceDao;
 
+	private ExecutorService executor;
+
 	@PostConstruct
 	public void openServerSocket() {
-		Executors.newFixedThreadPool(1).execute(this);
+		this.executor = Executors.newFixedThreadPool(1);
+		executor.execute(this);
 	}
 
 	@PreDestroy
 	public void closeServerSocket() {
 		try {
+			this.flag = false;
+			executor.shutdown();
 			this.server.close();
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -54,12 +60,13 @@ public class DeviceServiceImpl implements DeviceService, Runnable {
 
 	@Autowired
 	private DcDao dcDao;
+	private boolean flag = true;
 
 	@Override
 	public void run() {
 		try {
 			this.server = new ServerSocket(SocketUtil.SERVER_SOCKET_PORT);
-			while (true) {
+			while (flag) {
 				Socket socket = server.accept();
 				String tmp = this.socketUtil.readString(socket);
 				ObjectMapper mapper = new ObjectMapper();
@@ -71,8 +78,6 @@ public class DeviceServiceImpl implements DeviceService, Runnable {
 			e.printStackTrace();
 		} catch (Exception e) {
 			e.printStackTrace();
-		} finally {
-
 		}
 	}
 
