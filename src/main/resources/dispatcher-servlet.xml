@@ -16,8 +16,7 @@
 	<mvc:resources location="/css/" mapping="/css/**" />
 	<mvc:interceptors>
 		<mvc:interceptor>
-			<mvc:mapping path="/**" />
-			<mvc:exclude-mapping path="/public/**"/>
+			<mvc:mapping path="/admin/**" />
 			<mvc:exclude-mapping path="/login/**"/>
 			<bean class="com.whck.web.interceptor.LoginHandlerInterceptor" />
 		</mvc:interceptor>

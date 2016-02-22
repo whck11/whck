@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User login(String username, String password) throws Exception {
-		User user = userDao.findByUsername(username);
+		User user = userDao.findOne(username);
 		if (user == null) {
 			throw new Exception("用户不存在");
 		}
@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User findByUsername(String email) {
-		return this.userDao.findByUsername(email);
+		return this.userDao.findOne(email);
 	}
 
 	@Override

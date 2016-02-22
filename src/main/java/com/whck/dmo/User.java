@@ -10,20 +10,21 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.codehaus.jackson.annotate.JsonIgnore;
 
 /**
  * The persistent class for the user database table.
  * 
  */
 @Entity
-@NamedQuery(name="User.findAll", query="SELECT u FROM User u")
+@NamedQuery(name = "User.findAll", query = "SELECT u FROM User u")
 public class User implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
 	private String username;
 
-	@Column(name="activate_code")
+	@Column(name = "activate_code")
 	private String activateCode;
 
 	private String address;
@@ -31,24 +32,25 @@ public class User implements Serializable {
 	private String cname;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="cncl_date")
+	@Column(name = "cncl_date")
 	private Date cnclDate;
 
-	@Column(name="is_admin")
+	@Column(name = "is_admin")
 	private Integer isAdmin;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="logon_date")
+	@Column(name = "logon_date")
 	private Date logonDate;
 
 	private String name;
 
+	@JsonIgnore
 	private String password;
 
 	private String phone;
 
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="reg_date")
+	@Column(name = "reg_date")
 	private Date regDate;
 
 	private String remarks;

@@ -58,7 +58,7 @@ public class ZoneController {
 		zone.setLongitude(longitude);
 		zone.setRemarks(remarks);
 		zone.setZoneName(zoneName);
-		User user = this.userDao.findByUsername(username);
+		User user = this.userDao.findOne(username);
 		zone.setUser(user);
 		this.zoneDao.save(zone);
 		map.put("success", true);
@@ -84,7 +84,7 @@ public class ZoneController {
 		data.setLongitude(longitude);
 		data.setRemarks(remarks);
 		if (null != username && username.length() != 0) {
-			data.setUser(userDao.findByUsername(username));
+			data.setUser(userDao.findOne(username));
 		}
 		zoneDao.save(data);
 		map.put("result", true);

@@ -2,6 +2,7 @@ package com.whck.web.controller;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -91,5 +92,28 @@ public class UserController {
 		map.put("rows", pageList.getContent());
 		map.put("total", pageList.getTotalElements());
 		return map;
+	}
+
+	@RequestMapping("findAll.do")
+	@ResponseBody
+	public List<User> findAll() {
+		return this.userDao.findAll();
+	}
+
+	@RequestMapping("findOne.do")
+	@ResponseBody
+	public User findByUsername(String username) {
+		User user = this.userDao.findOne(username);
+		return user;
+	}
+
+	@RequestMapping("login.do")
+	@ResponseBody
+	public User login(String username, String password) {
+		User user = this.userDao.findOne(username);
+		if (!user.getPassword().equals(password)) {
+			user = null;
+		}
+		return user;
 	}
 }
