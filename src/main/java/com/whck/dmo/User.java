@@ -28,7 +28,7 @@ public class User implements Serializable {
 	@Column(name="user_id")
 	private Integer id;
 	
-	private String emai;
+	private String email;
 	
 	private String username;
 
@@ -84,8 +84,8 @@ public class User implements Serializable {
 		return this.cnclDate;
 	}
 
-	public String getEmai() {
-		return emai;
+	public String getEmail() {
+		return email;
 	}
 
 	public Integer getId() {
@@ -144,8 +144,8 @@ public class User implements Serializable {
 		this.cnclDate = cnclDate;
 	}
 
-	public void setEmai(String emai) {
-		this.emai = emai;
+	public void setEmail(String email) {
+		this.email = email;
 	}
 
 	public void setId(Integer id) {

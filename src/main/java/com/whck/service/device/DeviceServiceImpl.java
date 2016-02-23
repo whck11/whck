@@ -11,6 +11,8 @@ import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.transaction.Transactional;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,6 +30,8 @@ import com.whck.util.SocketUtil;
 @Transactional
 public class DeviceServiceImpl implements DeviceService, Runnable {
 
+	private static final Log log = LogFactory.getLog(DeviceServiceImpl.class);
+
 	private ServerSocket server;
 	@Autowired
 	private SocketUtil socketUtil;
@@ -43,11 +47,13 @@ public class DeviceServiceImpl implements DeviceService, Runnable {
 	}
 
 	@PreDestroy
-	public void closeServerSocket() {
+	public synchronized void closeServerSocket() {
 		try {
-			this.flag = false;
 			executor.shutdown();
-			this.server.close();
+			if (!this.server.isClosed()) {
+				this.server.close();
+			}
+			log.debug("serverSocket是否已经关闭：" + this.server.isClosed());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -60,13 +66,14 @@ public class DeviceServiceImpl implements DeviceService, Runnable {
 
 	@Autowired
 	private DcDao dcDao;
-	private boolean flag = true;
 
 	@Override
 	public void run() {
 		try {
+
 			this.server = new ServerSocket(SocketUtil.SERVER_SOCKET_PORT);
-			while (flag) {
+			log.debug("运行ServerSocket服务器,端口为：" + SocketUtil.SERVER_SOCKET_PORT);
+			while (!this.server.isClosed()) {
 				Socket socket = server.accept();
 				String tmp = this.socketUtil.readString(socket);
 				ObjectMapper mapper = new ObjectMapper();
