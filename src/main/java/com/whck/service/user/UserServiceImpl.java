@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User login(String username, String password) throws Exception {
-		User user = userDao.findOne(username);
+		User user = userDao.findByUsername(username);
 		if (user == null) {
 			throw new Exception("用户不存在");
 		}
@@ -28,10 +28,7 @@ public class UserServiceImpl implements UserService {
 		return user;
 	}
 
-	@Override
-	public User findByUsername(String email) {
-		return this.userDao.findOne(email);
-	}
+
 
 	@Override
 	@Transactional(value=TxType.REQUIRED,rollbackOn=Throwable.class)

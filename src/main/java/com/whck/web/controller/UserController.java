@@ -36,7 +36,7 @@ public class UserController {
 
 	@RequestMapping("updatePage.do")
 	public String updatePage(String username, HttpServletRequest request) {
-		request.setAttribute("user", this.userDao.findOne(username));
+		request.setAttribute("user", this.userDao.findByUsername(username));
 		return "user/update";
 	}
 
@@ -44,7 +44,7 @@ public class UserController {
 	@ResponseBody
 	public Map<String, Object> update(User user) {
 		Map<String, Object> map = new HashMap<>();
-		User data = this.userDao.findOne(user.getUsername());
+		User data = this.userDao.findByUsername(user.getUsername());
 		data.setAddress(user.getAddress());
 		data.setPhone(user.getPhone());
 		data.setCname(user.getCname());
@@ -100,17 +100,17 @@ public class UserController {
 		return this.userDao.findAll();
 	}
 
-	@RequestMapping("findOne.do")
+	@RequestMapping("findByUsername.do")
 	@ResponseBody
 	public User findByUsername(String username) {
-		User user = this.userDao.findOne(username);
+		User user = this.userDao.findByUsername(username);
 		return user;
 	}
 
 	@RequestMapping("login.do")
 	@ResponseBody
 	public User login(String username, String password) {
-		User user = this.userDao.findOne(username);
+		User user = this.userDao.findByUsername(username);
 		if (!user.getPassword().equals(password)) {
 			user = null;
 		}

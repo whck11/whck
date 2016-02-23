@@ -6,7 +6,5 @@ public interface UserService {
 
 	User login(String name, String password) throws Exception;
 
-	User findByUsername(String email);
-
 	void add(User user);
 }

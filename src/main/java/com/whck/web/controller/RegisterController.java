@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.whck.dao.UserDao;
 import com.whck.dmo.User;
 import com.whck.service.email.EmailService;
 import com.whck.service.user.UserService;
@@ -21,17 +22,20 @@ import com.whck.web.keys.Keys;
 @RequestMapping("register")
 @Controller
 public class RegisterController {
-	
+
 	@RequestMapping("page.do")
 	public String page() {
 		return "register";
 	}
 
+	@Autowired
+	private UserDao userDao;
+
 	@RequestMapping("sendCode.do")
 	@ResponseBody
 	public Map<String, Object> sendCode(String email, HttpSession session) {
 		Map<String, Object> map = new HashMap<>();
-		User u = this.userService.findByUsername(email);
+		User u = this.userDao.findByUsername(email);
 		if (u != null) {
 			map.put("msg", "该邮箱已被使用");
 			return map;
@@ -52,7 +56,7 @@ public class RegisterController {
 	@RequestMapping(method = RequestMethod.POST, value = "add.do")
 	public String add(User user, HttpSession session) {
 		String rt = null;
-		if(session.getAttribute(Keys.REGISTER_ACTIVE_CODE)==null){
+		if (session.getAttribute(Keys.REGISTER_ACTIVE_CODE) == null) {
 			return "register";
 		}
 		if (user.getActivateCode().equals(session.getAttribute(Keys.REGISTER_ACTIVE_CODE).toString())) {
