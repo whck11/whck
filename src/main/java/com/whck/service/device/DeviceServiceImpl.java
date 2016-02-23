@@ -55,7 +55,6 @@ public class DeviceServiceImpl implements DeviceService, Runnable {
 			}
 			log.debug("serverSocket是否已经关闭：" + this.server.isClosed());
 		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -70,7 +69,6 @@ public class DeviceServiceImpl implements DeviceService, Runnable {
 	@Override
 	public void run() {
 		try {
-
 			this.server = new ServerSocket(SocketUtil.SERVER_SOCKET_PORT);
 			log.debug("运行ServerSocket服务器,端口为：" + SocketUtil.SERVER_SOCKET_PORT);
 			while (!this.server.isClosed()) {
