@@ -1,11 +1,14 @@
 package com.whck.web.controller;
 
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -109,11 +112,20 @@ public class UserController {
 
 	@RequestMapping("login.do")
 	@ResponseBody
-	public User login(String username, String password) {
+	public User login(String username, String password, HttpServletResponse response) {
 		User user = this.userDao.findByUsername(username);
-		if (!user.getPassword().equals(password)) {
-			user = null;
+		try {
+			OutputStream output=response.getOutputStream();
+			if (user == null) {
+				output.write("用户名不存在".getBytes("UTF-8"));
+			} else if (!user.getPassword().equals(password)) {
+				user = null;
+				output.write("密码不正确".getBytes("UTF-8"));
+			}
+		} catch (IOException e1) {
+			e1.printStackTrace();
 		}
+		
 		return user;
 	}
 }
