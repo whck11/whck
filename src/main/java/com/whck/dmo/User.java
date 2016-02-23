@@ -28,6 +28,8 @@ public class User implements Serializable {
 	@Column(name="user_id")
 	private Integer id;
 	
+	private String emai;
+	
 	private String username;
 
 	@Column(name = "activate_code")
@@ -66,108 +68,124 @@ public class User implements Serializable {
 	public User() {
 	}
 
-	public String getUsername() {
-		return this.username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
 	public String getActivateCode() {
 		return this.activateCode;
-	}
-
-	public void setActivateCode(String activateCode) {
-		this.activateCode = activateCode;
 	}
 
 	public String getAddress() {
 		return this.address;
 	}
 
-	public void setAddress(String address) {
-		this.address = address;
-	}
-
 	public String getCname() {
 		return this.cname;
-	}
-
-	public void setCname(String cname) {
-		this.cname = cname;
 	}
 
 	public Date getCnclDate() {
 		return this.cnclDate;
 	}
 
-	public void setCnclDate(Date cnclDate) {
-		this.cnclDate = cnclDate;
+	public String getEmai() {
+		return emai;
+	}
+
+	public Integer getId() {
+		return id;
 	}
 
 	public Integer getIsAdmin() {
 		return this.isAdmin;
 	}
 
-	public void setIsAdmin(Integer isAdmin) {
-		this.isAdmin = isAdmin;
-	}
-
 	public Date getLogonDate() {
 		return this.logonDate;
-	}
-
-	public void setLogonDate(Date logonDate) {
-		this.logonDate = logonDate;
 	}
 
 	public String getName() {
 		return this.name;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getPassword() {
 		return this.password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public String getPhone() {
 		return this.phone;
 	}
 
-	public void setPhone(String phone) {
-		this.phone = phone;
-	}
-
 	public Date getRegDate() {
 		return this.regDate;
-	}
-
-	public void setRegDate(Date regDate) {
-		this.regDate = regDate;
 	}
 
 	public String getRemarks() {
 		return this.remarks;
 	}
 
-	public void setRemarks(String remarks) {
-		this.remarks = remarks;
-	}
-
 	public Integer getState() {
 		return this.state;
 	}
 
+	public String getUsername() {
+		return this.username;
+	}
+
+	public void setActivateCode(String activateCode) {
+		this.activateCode = activateCode;
+	}
+
+	public void setAddress(String address) {
+		this.address = address;
+	}
+
+	public void setCname(String cname) {
+		this.cname = cname;
+	}
+
+	public void setCnclDate(Date cnclDate) {
+		this.cnclDate = cnclDate;
+	}
+
+	public void setEmai(String emai) {
+		this.emai = emai;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public void setIsAdmin(Integer isAdmin) {
+		this.isAdmin = isAdmin;
+	}
+
+	public void setLogonDate(Date logonDate) {
+		this.logonDate = logonDate;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public void setPhone(String phone) {
+		this.phone = phone;
+	}
+
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
+
+	public void setRemarks(String remarks) {
+		this.remarks = remarks;
+	}
+
 	public void setState(Integer state) {
 		this.state = state;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 }
