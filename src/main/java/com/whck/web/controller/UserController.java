@@ -1,14 +1,12 @@
 package com.whck.web.controller;
 
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -20,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ctc.wstx.util.StringUtil;
 import com.whck.dao.UserDao;
 import com.whck.dmo.User;
+import com.whck.web.keys.Keys;
 
 @RequestMapping("user")
 @Controller
@@ -112,20 +111,18 @@ public class UserController {
 
 	@RequestMapping("login.do")
 	@ResponseBody
-	public User login(String username, String password, HttpServletResponse response) {
+	public Map<String, Object> login(String username, String password, HttpSession session) {
+		Map<String, Object> map = new HashMap<>();
 		User user = this.userDao.findByUsername(username);
-		try {
-			OutputStream output=response.getOutputStream();
-			if (user == null) {
-				output.write("用户名不存在".getBytes("UTF-8"));
-			} else if (!user.getPassword().equals(password)) {
-				user = null;
-				output.write("密码不正确".getBytes("UTF-8"));
-			}
-		} catch (IOException e1) {
-			e1.printStackTrace();
+		if (user == null) {
+			map.put("msg", "登录名不存在");
+		} else if (!user.getPassword().equals(password)) {
+			map.put("msg", "密码不正确");
+		} else {
+			map.put("success", true);
+			map.put("user", user);
 		}
-		
-		return user;
+		session.setAttribute(Keys.LOGIN_SESSION_DATA, user);
+		return map;
 	}
 }
