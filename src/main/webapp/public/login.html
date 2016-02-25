@@ -101,35 +101,35 @@
 							<form role="form">
 
 								<div class="form-group">
-									<label for="exampleInputUsername">用户名</label> <i
+									<label for="reg_username">用户名</label> <i
 										class="fa fa-user"></i> <input type="text"
-										class="form-control" id="exampleInputUsername">
+										class="form-control" id="reg_username">
 								</div>
 								<div class="form-group">
-									<label for="exampleInputEmail6">邮箱地址</label> <i
+									<label for="reg_email">邮箱地址</label> <i
 										class="fa fa-envelope"></i> <input type="email"
-										class="form-control" id="exampleInputEmail6">
+										class="form-control" id="reg_email">
 								</div>
 								<div class="form-group">
-									<label for="exampleInputPassword1">密码</label> <i
+									<label for="reg_password">密码</label> <i
 										class="fa fa-lock"></i> <input type="password"
-										class="form-control" id="exampleInputPassword1">
+										class="form-control" id="reg_password">
 								</div>
 								<div class="form-group">
-									<label for="exampleInputPassword2">确认密码</label> <i
+									<label for="reg_password2">确认密码</label> <i
 										class="fa fa-check-square-o"></i> <input type="password"
-										class="form-control" id="exampleInputPassword2">
+										class="form-control" id="reg_password2">
 								</div>
 								<div class="form-group">
-									<label for="exampleInputName">手机号码</label> <i
+									<label for="reg_phone">手机号码</label> <i
 										class="fa fa-font"></i> <input type="text"
-										class="form-control" id="exampleInputName">
+										class="form-control" id="reg_phone">
 								</div>
 								<div class="row form-group">
 									<div class="col-md-6">
-										<label for="exampleInputName8">验证码</label> <i
+										<label for="reg_code">验证码</label> <i
 											class="fa fa-hand-o-right"></i> <input type="text"
-											class="form-control" id="exampleInputName8">
+											class="form-control" id="reg_code">
 									</div>
 									<div class="col-md-6">
 										<label></label> <input type="button" id="btn1"
@@ -165,9 +165,9 @@
 								<div class="form-actions">
 
 									<label class="checkbox"> <input type="checkbox"
-										class="uniform" value=""> 已阅读并同意本站的<a href="#">用户协议</a>.
+										class="uniform" value="同意" id="isConfirm"> 已阅读并同意本站的<a href="#">用户协议</a>.
 									</label>
-									<button type="submit" class="btn btn-success">注册</button>
+									<button type="button" class="btn btn-success" id="btnRegister">注册</button>
 								</div>
 							</form>
 							<!-- SOCIAL REGISTER -->
@@ -194,20 +194,20 @@
 							<form role="form">
 								<div class="form-group">
 									<label>手机号码</label> <i class="fa fa-font"></i> <input
-										type="text" class="form-control">
+										type="text" class="form-control" id="f_phone">
 								</div>
 								<div class="form-group">
 									<label>新密码</label> <i class="fa fa-lock"></i> <input
-										type="password" class="form-control">
+										type="password" class="form-control" id="f_new_password">
 								</div>
 								<div class="form-group">
 									<label>确认密码</label> <i class="fa fa-check-square-o"></i> <input
-										type="password" class="form-control">
+										type="password" class="form-control" id="f_new_password2">
 								</div>
 								<div class="row form-group">
 									<div class="col-md-6">
 										<label>验证码</label> <i class="fa fa-hand-o-right"></i> <input
-											type="text" class="form-control">
+											type="text" class="form-control" id="f_code">
 									</div>
 									<div class="col-md-6">
 										<label></label> <input type="button" id="btn2"
@@ -242,7 +242,7 @@
 								</div>
 
 								<div class="form-actions">
-									<button type="submit" class="btn btn-info">确认重置密码</button>
+									<button type="submit" id="btnForget" class="btn btn-info">确认重置密码</button>
 								</div>
 							</form>
 							<div class="login-helpers">
@@ -275,6 +275,7 @@
 	<script src="../js/login.js"></script>
 	<script>
 		jQuery(document).ready(function() {
+			var page=sessionStorage.getItem('page')||'login';
 			App.setPage("login"); //Set current page
 			App.init(); //Initialise plugins and elements
 		});

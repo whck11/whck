@@ -6,4 +6,6 @@ import com.whck.dmo.User;
 
 public interface UserDao extends JpaRepository<User, String> {
 	public User findByUsername(String username);
+
+	public User findByPhone(String phone);
 }
