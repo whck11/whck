@@ -10,6 +10,16 @@ function bindLogin() {
 			if (data.success) {
 				var user = data.user;
 				alert("欢迎您" + user.name);
+				var remember = $('#remember').is(':checked');
+				if (remember) {
+					localStorage.setItem('remember', true);
+					localStorage.setItem('username', username);
+					localStorage.setItem('password', password);
+				} else {
+					localStorage.removeItem('remember', false);
+					localStorage.removeItem('username');
+					localStorage.removeItem('password');
+				}
 			} else {
 				alert(data.msg);
 			}
@@ -17,7 +27,12 @@ function bindLogin() {
 		$.post('../user/login.do', params, handler, 'json');
 	})
 }
-
+function loadLocalStorage() {
+	if (localStorage.getItem('remember')) {
+		$('#username').val(localStorage.getItem('username'));
+		$('#password').val(localStorage.getItem('password'));
+	}
+}
 function bindSendCode1() {
 	$('#btn1').click(function() {
 		var phone = $('#register_phone').val();
@@ -92,6 +107,7 @@ function bindResetPassword() {
 	});
 }
 $(function() {
+	loadLocalStorage();
 	bindResetPassword();
 	bindLogin();
 	bindSendCode1();
