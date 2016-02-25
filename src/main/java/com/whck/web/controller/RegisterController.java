@@ -17,6 +17,7 @@ import com.whck.dao.UserDao;
 import com.whck.dmo.User;
 import com.whck.service.email.EmailService;
 import com.whck.service.user.UserService;
+import com.whck.util.Md5Util;
 import com.whck.web.keys.Keys;
 
 @RequestMapping("register")
@@ -61,6 +62,7 @@ public class RegisterController {
 		}
 		if (user.getActivateCode().equals(session.getAttribute(Keys.REGISTER_ACTIVE_CODE).toString())) {
 			user.setRegDate(new Date());
+			user.setPassword(Md5Util.getSecurityCode(user.getPassword()));
 			this.userService.add(user);
 			rt = "login";
 		} else {

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.whck.dao.UserDao;
 import com.whck.dmo.User;
+import com.whck.util.Md5Util;
 import com.whck.web.keys.Keys;
 
 @Controller
@@ -26,8 +27,8 @@ public class AdminController {
 		Map<String, Object> map = new HashMap<>();
 		User data = (User) session.getAttribute(Keys.LOGIN_SESSION_DATA);
 		data=this.userDao.findOne(data.getUsername());
-		if(data.getPassword().equals(oldPassword)){
-			data.setPassword(newPassword);
+		if(data.getPassword().equals(Md5Util.getSecurityCode(oldPassword))){
+			data.setPassword(Md5Util.getSecurityCode(newPassword));
 			this.userDao.save(data);
 			map.put("result", true);
 		}else{

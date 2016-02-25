@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.whck.dmo.User;
 import com.whck.service.user.UserService;
+import com.whck.util.Md5Util;
 import com.whck.web.keys.Keys;
 
 @Controller
@@ -36,7 +37,7 @@ public class LoginController {
 	@RequestMapping(value = "submit.do", method = RequestMethod.POST)
 	public String login(String username, String password, HttpSession session) {
 		try {
-			User user = this.userService.login(username, password);
+			User user = this.userService.login(username, Md5Util.getSecurityCode(password));
 			if(user.getIsAdmin()==0){
 				throw new Exception("您没有管理员权限");
 			}

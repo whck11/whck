@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.ctc.wstx.util.StringUtil;
 import com.whck.dao.UserDao;
 import com.whck.dmo.User;
+import com.whck.util.Md5Util;
 import com.whck.util.PhoneCodeUtil;
 import com.whck.web.keys.Keys;
 
@@ -81,7 +82,7 @@ public class UserController {
 			return map;
 		}
 		user.setRegDate(new Date());
-		user.setPassword("000000");
+		user.setPassword(Md5Util.getSecurityCode("000000"));
 		this.userDao.save(user);
 		map.put("success", true);
 		map.put("msg", "初始密码为000000");
@@ -118,7 +119,7 @@ public class UserController {
 		User user = this.userDao.findByUsername(username);
 		if (user == null) {
 			map.put("msg", "登录名不存在");
-		} else if (!user.getPassword().equals(password)) {
+		} else if (!user.getPassword().equals(Md5Util.getSecurityCode(password))) {
 			map.put("msg", "密码不正确");
 		} else {
 			map.put("success", true);
@@ -169,7 +170,7 @@ public class UserController {
 		User user = new User();
 		user.setUsername(username);
 		user.setEmail(email);
-		user.setPassword(password);
+		user.setPassword(Md5Util.getSecurityCode(password));
 		user.setPhone(phone);
 		user.setActivateCode(code);
 		this.userDao.save(user);
@@ -199,7 +200,7 @@ public class UserController {
 			map.put("msg", "该手机并未注册");
 			return map;
 		}
-		user.setPassword(password);
+		user.setPassword(Md5Util.getSecurityCode(password));
 		userDao.save(user);
 		map.put("success", true);
 		return map;
