@@ -42,6 +42,7 @@
 		<property name="numTestsPerEvictionRun" value="10" />
 		<!-- 1000 * 60 * 30 连接在池中保持空闲而不被空闲连接回收器线程 -->
 		<property name="minEvictableIdleTimeMillis" value="10000" />
+		<property name="validationQuery" value="SELECT NOW() FROM DUAL"/>
 	</bean>
 	<tx:annotation-driven transaction-manager="transactionManager" />
 </beans>
