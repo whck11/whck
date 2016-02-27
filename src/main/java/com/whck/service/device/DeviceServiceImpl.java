@@ -41,8 +41,14 @@ public class DeviceServiceImpl implements DeviceService, Runnable {
 	private ExecutorService executor;
 
 	@PostConstruct
-	public void openServerSocket() {
-		this.executor = Executors.newFixedThreadPool(1);
+	public synchronized void openServerSocket() {
+		try {
+			this.server = new ServerSocket(SocketUtil.SERVER_SOCKET_PORT);
+			log.debug("运行ServerSocket服务器,端口为：" + SocketUtil.SERVER_SOCKET_PORT);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		this.executor = Executors.newCachedThreadPool();
 		executor.execute(this);
 	}
 
@@ -69,8 +75,6 @@ public class DeviceServiceImpl implements DeviceService, Runnable {
 	@Override
 	public void run() {
 		try {
-			this.server = new ServerSocket(SocketUtil.SERVER_SOCKET_PORT);
-			log.debug("运行ServerSocket服务器,端口为：" + SocketUtil.SERVER_SOCKET_PORT);
 			while (!this.server.isClosed()) {
 				Socket socket = server.accept();
 				String tmp = this.socketUtil.readString(socket);
