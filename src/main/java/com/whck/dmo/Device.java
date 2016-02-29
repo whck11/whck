@@ -1,6 +1,7 @@
 package com.whck.dmo;
 
 import java.io.Serializable;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,6 +12,8 @@ import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 /**
@@ -42,7 +45,52 @@ public class Device implements Serializable {
 	private String ip;
 
 	private Integer state;
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="start_time")
+	private Date startTime;
+	
+	@Temporal(TemporalType.TIMESTAMP)
+	@Column(name="end_time")
+	private Date endTime;
+	
+	
+	@Column(name="run_time")
+	private Integer runTime;
 
+	public Date getStartTime() {
+		return startTime;
+	}
+
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
+	public Date getEndTime() {
+		return endTime;
+	}
+
+	public void setEndTime(Date endTime) {
+		this.endTime = endTime;
+	}
+
+	public Integer getRunTime() {
+		return runTime;
+	}
+
+	public void setRunTime(Integer runTime) {
+		this.runTime = runTime;
+	}
+
+	public Integer getStopTime() {
+		return stopTime;
+	}
+
+	public void setStopTime(Integer stopTime) {
+		this.stopTime = stopTime;
+	}
+
+	@Column(name="stop_time")
+	private Integer stopTime;
 	//bi-directional many-to-one association to Dc
 	@ManyToOne
 	@JoinColumn(name="dc_id")
