@@ -1,8 +1,6 @@
 package com.whck.dmo;
 
 import java.io.Serializable;
-import java.util.Date;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -11,8 +9,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 
 /**
@@ -29,9 +25,7 @@ public class Variable implements Serializable {
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer variableId;
 
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="end_time")
-	private Date endTime;
+	
 
 	@Column(name="max_value")
 	private double maxValue;
@@ -40,16 +34,6 @@ public class Variable implements Serializable {
 	private double minValue;
 
 	private String name;
-
-	@Column(name="run_time")
-	private Integer runTime;
-
-	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="start_time")
-	private Date startTime;
-
-	@Column(name="stop_time")
-	private Integer stopTime;
 
 	private String unit;
 
@@ -71,14 +55,7 @@ public class Variable implements Serializable {
 		this.variableId = variableId;
 	}
 
-	public Date getEndTime() {
-		return this.endTime;
-	}
-
-	public void setEndTime(Date endTime) {
-		this.endTime = endTime;
-	}
-
+	
 	public double getMaxValue() {
 		return this.maxValue;
 	}
@@ -103,29 +80,7 @@ public class Variable implements Serializable {
 		this.name = name;
 	}
 
-	public Integer getRunTime() {
-		return this.runTime;
-	}
-
-	public void setRunTime(Integer runTime) {
-		this.runTime = runTime;
-	}
-
-	public Date getStartTime() {
-		return this.startTime;
-	}
-
-	public void setStartTime(Date startTime) {
-		this.startTime = startTime;
-	}
-
-	public Integer getStopTime() {
-		return this.stopTime;
-	}
-
-	public void setStopTime(Integer stopTime) {
-		this.stopTime = stopTime;
-	}
+	
 
 	public String getUnit() {
 		return this.unit;
