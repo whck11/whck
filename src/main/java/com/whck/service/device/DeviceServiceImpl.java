@@ -28,7 +28,7 @@ import com.whck.util.SocketUtil;
  */
 @Service
 @Transactional
-public class DeviceServiceImpl implements DeviceService, Runnable {
+public class DeviceServiceImpl extends Thread implements DeviceService {
 
 	private static final Log log = LogFactory.getLog(DeviceServiceImpl.class);
 
@@ -38,24 +38,24 @@ public class DeviceServiceImpl implements DeviceService, Runnable {
 	@Autowired
 	private DeviceDao deviceDao;
 
-	private ExecutorService executor;
-
 	@PostConstruct
 	public synchronized void openServerSocket() {
 		try {
 			this.server = new ServerSocket(SocketUtil.SERVER_SOCKET_PORT);
 			log.debug("运行ServerSocket服务器,端口为：" + SocketUtil.SERVER_SOCKET_PORT);
+			this.setDaemon(true);
+			this.start();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		this.executor = Executors.newCachedThreadPool();
-		executor.execute(this);
 	}
+
+	private boolean isShutdown = false;
 
 	@PreDestroy
 	public synchronized void closeServerSocket() {
 		try {
-			executor.shutdown();
+			this.isShutdown = true;
 			if (!this.server.isClosed()) {
 				this.server.close();
 			}
@@ -74,14 +74,40 @@ public class DeviceServiceImpl implements DeviceService, Runnable {
 
 	@Override
 	public void run() {
+		ExecutorService executor = Executors.newCachedThreadPool();
 		try {
-			while (!this.server.isClosed()) {
-				Socket socket = server.accept();
-				String tmp = this.socketUtil.readString(socket);
-				ObjectMapper mapper = new ObjectMapper();
-				Device device = mapper.readValue(tmp, Device.class);
-				device.setDc(dcDao.findOne(device.getDc().getId()));
-				this.deviceDao.save(device);
+			while (!isShutdown) {
+				final Socket socket = server.accept();
+				Thread t = new Thread() {
+					public void run() {
+						String tmp = socketUtil.readString(socket);
+						ObjectMapper mapper = new ObjectMapper();
+						try {
+							Device device = mapper.readValue(tmp, Device.class);
+							Device data=deviceDao.findByDeviceName(device.getDeviceName());
+							if (data!=null) {
+								device=data;
+							}
+							if (device.getDc()!=null) {
+								device.setDc(dcDao.findOne(device.getDc().getId()));
+							}
+							device.setState(1);
+							deviceDao.save(device);
+							while (true) {
+								if (!socket.isConnected() ) {
+									device.setState(0);
+									deviceDao.save(device);
+									break;
+								}
+							}
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+
+					};
+				};
+				t.setDaemon(true);
+				executor.execute(t);
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
