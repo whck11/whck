@@ -6,4 +6,6 @@ import com.whck.dmo.Device;
 
 public interface DeviceDao extends JpaRepository<Device, Integer>{
 
+	Device findByDeviceName(String deviceName);
+
 }
