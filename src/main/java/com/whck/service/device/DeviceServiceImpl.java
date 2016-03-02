@@ -1,26 +1,14 @@
 package com.whck.service.device;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.PreDestroy;
 import javax.transaction.Transactional;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.whck.dao.DcDao;
 import com.whck.dao.DeviceDao;
 import com.whck.dmo.Device;
-import com.whck.util.SocketUtil;
 
 /**
  * 
@@ -28,92 +16,17 @@ import com.whck.util.SocketUtil;
  */
 @Service
 @Transactional
-public class DeviceServiceImpl extends Thread implements DeviceService {
+public class DeviceServiceImpl  implements DeviceService {
 
-	private static final Log log = LogFactory.getLog(DeviceServiceImpl.class);
-
-	private ServerSocket server;
-	@Autowired
-	private SocketUtil socketUtil;
 	@Autowired
 	private DeviceDao deviceDao;
 
-	@PostConstruct
-	public synchronized void openServerSocket() {
-		try {
-			this.server = new ServerSocket(SocketUtil.SERVER_SOCKET_PORT);
-			log.debug("运行ServerSocket服务器,端口为：" + SocketUtil.SERVER_SOCKET_PORT);
-			this.setDaemon(true);
-			this.start();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-
-	private boolean isShutdown = false;
-
-	@PreDestroy
-	public synchronized void closeServerSocket() {
-		try {
-			this.isShutdown = true;
-			if (!this.server.isClosed()) {
-				this.server.close();
-			}
-			log.debug("serverSocket是否已经关闭：" + this.server.isClosed());
-		} catch (IOException e) {
-		}
-	}
-
+	
 	@Override
 	public List<Device> findAll() {
 		return this.deviceDao.findAll();
 	}
 
-	@Autowired
-	private DcDao dcDao;
 
-	@Override
-	public void run() {
-		ExecutorService executor = Executors.newCachedThreadPool();
-		try {
-			while (!isShutdown) {
-				final Socket socket = server.accept();
-				Thread t = new Thread() {
-					public void run() {
-						String tmp = socketUtil.readString(socket);
-						ObjectMapper mapper = new ObjectMapper();
-						try {
-							Device device = mapper.readValue(tmp, Device.class);
-							Device data=deviceDao.findByDeviceName(device.getDeviceName());
-							if (data!=null) {
-								device=data;
-							}
-							if (device.getDc()!=null) {
-								device.setDc(dcDao.findOne(device.getDc().getId()));
-							}
-							device.setState(1);
-							deviceDao.save(device);
-							while (true) {
-								if (!socket.isConnected() ) {
-									device.setState(0);
-									deviceDao.save(device);
-									break;
-								}
-							}
-						} catch (IOException e) {
-							e.printStackTrace();
-						}
-
-					};
-				};
-				t.setDaemon(true);
-				executor.execute(t);
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
 
 }

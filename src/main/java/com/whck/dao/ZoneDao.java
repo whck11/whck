@@ -13,4 +13,6 @@ public interface ZoneDao extends JpaRepository<Zone, Integer> {
 	List<Zone> findByUser_NameLike(String name);
 
 	Page<Zone> findAll(Pageable pageable);
+
+	Zone findByZoneName(String zoneName);
 }
