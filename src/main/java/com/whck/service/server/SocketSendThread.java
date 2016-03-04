@@ -2,11 +2,12 @@ package com.whck.service.server;
 
 import java.io.IOException;
 import java.net.Socket;
+import java.util.concurrent.Callable;
 
 import com.whck.dmo.Device;
 import com.whck.service.dc.CommandResolver;
 
-public class SocketSendThread extends Thread {
+public class SocketSendThread implements Callable<Boolean> {
 	private Device device;
 
 	public SocketSendThread(Device device, CommandResolver resolver) {
@@ -17,7 +18,7 @@ public class SocketSendThread extends Thread {
 	private CommandResolver resolver;
 
 	@Override
-	public void run() {
+	public Boolean call() throws Exception {
 		Socket socket = null;
 		try {
 			socket = new Socket(device.getIp(), device.getPort());
@@ -36,5 +37,6 @@ public class SocketSendThread extends Thread {
 				}
 			}
 		}
+		return true;
 	}
 }

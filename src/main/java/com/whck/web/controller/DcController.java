@@ -17,9 +17,10 @@ public class DcController {
 	public Map<String, Object> sendCommand(Dc dc) {
 		Map<String, Object> map = new HashMap<>();
 		try {
-			dcService.sendCommand(dc);
+			Map<Integer, Boolean> result = dcService.sendCommand(dc);
 			dcService.save(dc);
 			map.put("success", true);
+			map.put("result", result);
 		} catch (Exception e) {
 			e.printStackTrace();
 			map.put("msg", e.getMessage());

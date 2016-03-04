@@ -1,16 +1,16 @@
 package com.whck.service.dc;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
+import java.util.concurrent.Future;
 import javax.annotation.PostConstruct;
 import javax.annotation.PreDestroy;
 import javax.transaction.Transactional;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
 import com.whck.dao.DcDao;
 import com.whck.dao.DeviceDao;
 import com.whck.dao.ZoneDao;
@@ -65,13 +65,14 @@ public class DcServiceImpl implements DcService {
 	private CommandResolver resolver;
 
 	@Override
-	public void sendCommand(Dc dc) throws Exception {
+	public Map<Integer, Boolean> sendCommand(Dc dc) throws Exception {
+		Map<Integer, Boolean> map = new HashMap<>();
 		for (Device d : dc.getDevices()) {
 			SocketSendThread socketSendThread = new SocketSendThread(d, resolver);
-			socketSendThread.setDaemon(true);
-			executor.execute(socketSendThread);
+			Future<Boolean> future = executor.submit(socketSendThread);
+			map.put(d.getDeviceId(), future.get());
 		}
-
+		return map;
 	}
 
 }
