@@ -5,7 +5,6 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.List;
-
 import com.whck.dmo.Dc;
 import com.whck.dmo.Device;
 import com.whck.service.dc.DcService;
@@ -21,12 +20,12 @@ public class SocketReadThread extends Thread {
 	}
 
 	private DcService dcService;
-	private byte[] command;
+	private String command;
 	private Socket socket;
 	private CommandResolver resolver;
 	private Dc dc;
 
-	public byte[] getCommand() {
+	public String getCommand() {
 		return command;
 	}
 
@@ -59,7 +58,7 @@ public class SocketReadThread extends Thread {
 				}
 			}
 		}
-		this.command=builder.toString().getBytes();
+		this.command=builder.toString();
 		this.dc=resolver.resolve(command);
 		List<Device> devices = dc.getDevices();
 		for (Device device : devices) {

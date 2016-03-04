@@ -14,7 +14,7 @@ public class CommandResolverImpl implements CommandResolver{
 	}
 
 	@Override
-	public Dc resolve(byte[] command) {
+	public Dc resolve(String command) {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -6,5 +6,5 @@ public interface CommandResolver {
 	
 	public String deResolve(Dc dc);
 
-	public Dc resolve(byte[] command);
+	public Dc resolve(String command);
 }
