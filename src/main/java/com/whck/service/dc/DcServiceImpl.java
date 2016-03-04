@@ -18,6 +18,7 @@ import com.whck.dmo.Dc;
 import com.whck.dmo.Device;
 import com.whck.dmo.Zone;
 import com.whck.service.server.SocketSendThread;
+import com.whck.util.CommandResolver;
 
 @Service
 @Transactional

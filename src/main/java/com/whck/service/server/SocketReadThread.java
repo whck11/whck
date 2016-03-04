@@ -1,13 +1,13 @@
 package com.whck.service.server;
 
+import java.io.BufferedInputStream;
+import java.io.IOException;
 import java.net.Socket;
 import java.util.List;
-
 import com.whck.dmo.Dc;
 import com.whck.dmo.Device;
-import com.whck.service.dc.CommandResolver;
 import com.whck.service.dc.DcService;
-import com.whck.util.SocketUtil;
+import com.whck.util.CommandResolver;
 
 public class SocketReadThread extends Thread {
 
@@ -19,12 +19,12 @@ public class SocketReadThread extends Thread {
 	}
 
 	private DcService dcService;
-	private String command;
+	private byte[] command;
 	private Socket socket;
 	private CommandResolver resolver;
 	private Dc dc;
 
-	public String getCommand() {
+	public byte[] getCommand() {
 		return command;
 	}
 
@@ -41,8 +41,28 @@ public class SocketReadThread extends Thread {
 		for (Device device : devices) {
 			device.setState(1);
 		}
-		this.command = SocketUtil.readString(socket);
+		BufferedInputStream in = null;
+		try {
+			in = new BufferedInputStream(socket.getInputStream());
+			command = new byte[in.available()];
+			in.read(command);
+		} catch (IOException e) {
+			e.printStackTrace();
+		} finally {
+			if (null != in) {
+				try {
+					in.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
 		this.dc = this.resolver.resolve(command);
 		this.dcService.save(dc);
+		try {
+			socket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 }

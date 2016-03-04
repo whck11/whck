@@ -12,9 +12,8 @@ import javax.annotation.PreDestroy;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.whck.service.dc.CommandResolver;
 import com.whck.service.dc.DcService;
-import com.whck.util.SocketUtil;
+import com.whck.util.CommandResolver;
 
 @Service
 public class DcServerImpl extends Thread implements DcServer {
@@ -50,7 +49,7 @@ public class DcServerImpl extends Thread implements DcServer {
 	@PostConstruct
 	public void startServer() {
 		try {
-			this.server = new ServerSocket(SocketUtil.SERVER_SOCKET_PORT);
+			this.server = new ServerSocket(9090);
 			this.setDaemon(true);
 			this.start();
 		} catch (IOException e) {

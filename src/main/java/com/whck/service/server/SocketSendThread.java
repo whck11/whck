@@ -1,12 +1,12 @@
 package com.whck.service.server;
 
+import java.io.BufferedOutputStream;
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.net.Socket;
 import java.util.concurrent.Callable;
 
 import com.whck.dmo.Device;
-import com.whck.service.dc.CommandResolver;
+import com.whck.util.CommandResolver;
 
 public class SocketSendThread implements Callable<Boolean> {
 	private Device device;
@@ -21,18 +21,18 @@ public class SocketSendThread implements Callable<Boolean> {
 	@Override
 	public Boolean call() throws Exception {
 		Socket socket = null;
-		PrintWriter writer=null;
+		BufferedOutputStream out=null;
 		try {
 			socket = new Socket(device.getIp(), device.getPort());
-			String str = resolver.deResolve(device.getDc());
-			writer=new PrintWriter(socket.getOutputStream());
-			writer.print(str);
-			writer.flush();
+			out=new BufferedOutputStream(socket.getOutputStream());
+			byte[] bs = resolver.deResolve(device.getDc());
+			out.write(bs);
+			out.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
-			if (writer!=null) {
-				writer.close();
+			if (out!=null) {
+				out.close();
 			}
 			if (socket != null) {
 				try {
