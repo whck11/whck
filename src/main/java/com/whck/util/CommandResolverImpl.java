@@ -8,7 +8,7 @@ import com.whck.dmo.Dc;
 public class CommandResolverImpl implements CommandResolver{
 
 	@Override
-	public byte[] deResolve(Dc dc) {
+	public String deResolve(Dc dc) {
 		// TODO Auto-generated method stub
 		return null;
 	}

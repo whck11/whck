@@ -1,7 +1,8 @@
 package com.whck.service.server;
 
-import java.io.BufferedOutputStream;
+import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.OutputStreamWriter;
 import java.net.Socket;
 import java.util.concurrent.Callable;
 
@@ -17,22 +18,23 @@ public class SocketSendThread implements Callable<Boolean> {
 	}
 
 	private CommandResolver resolver;
+	private String command;
 
 	@Override
 	public Boolean call() throws Exception {
 		Socket socket = null;
-		BufferedOutputStream out=null;
+		BufferedWriter writer = null;
 		try {
 			socket = new Socket(device.getIp(), device.getPort());
-			out=new BufferedOutputStream(socket.getOutputStream());
-			byte[] bs = resolver.deResolve(device.getDc());
-			out.write(bs);
-			out.flush();
+			writer = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
+			this.command=resolver.deResolve(device.getDc());
+			writer.write(this.command);
+			writer.flush();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
-			if (out!=null) {
-				out.close();
+			if (writer != null) {
+				writer.close();
 			}
 			if (socket != null) {
 				try {

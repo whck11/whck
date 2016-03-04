@@ -1,9 +1,11 @@
 package com.whck.service.server;
 
-import java.io.BufferedInputStream;
+import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.net.Socket;
 import java.util.List;
+
 import com.whck.dmo.Dc;
 import com.whck.dmo.Device;
 import com.whck.service.dc.DcService;
@@ -37,27 +39,32 @@ public class SocketReadThread extends Thread {
 		if (this.socket == null || !socket.isConnected()) {
 			return;
 		}
-		List<Device> devices = dc.getDevices();
-		for (Device device : devices) {
-			device.setState(1);
-		}
-		BufferedInputStream in = null;
+		BufferedReader reader = null;
+		StringBuilder builder=new StringBuilder();
 		try {
-			in = new BufferedInputStream(socket.getInputStream());
-			command = new byte[in.available()];
-			in.read(command);
+			reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			String tmp=null;
+			while((tmp=reader.readLine())!=null){
+				builder.append(tmp);
+			}
 		} catch (IOException e) {
 			e.printStackTrace();
 		} finally {
-			if (null != in) {
+			if (null != reader) {
 				try {
-					in.close();
+					reader.close();
+					socket.close();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 			}
 		}
-		this.dc = this.resolver.resolve(command);
+		this.command=builder.toString().getBytes();
+		this.dc=resolver.resolve(command);
+		List<Device> devices = dc.getDevices();
+		for (Device device : devices) {
+			device.setState(1);
+		}
 		this.dcService.save(dc);
 		try {
 			socket.close();
