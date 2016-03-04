@@ -2,7 +2,6 @@ package com.whck.util;
 
 import java.io.BufferedReader;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
@@ -67,16 +66,4 @@ public class SocketUtil {
 		return printWriter;
 	}
 
-	public static byte[] read(Socket socket) {
-		InputStream in=null;
-		byte[] bs=null;
-		try {
-			in=socket.getInputStream();
-			bs=new byte[in.available()];
-			in.read(bs);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return bs;
-	}
 }

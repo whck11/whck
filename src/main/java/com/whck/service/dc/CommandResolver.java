@@ -3,7 +3,8 @@ package com.whck.service.dc;
 import com.whck.dmo.Dc;
 
 public interface CommandResolver {
-	public Dc resolve(byte[] command);
+	
+	public String deResolve(Dc dc);
 
-	public byte[] deResolve(Dc dc);
+	public Dc resolve(String command);
 }

@@ -7,14 +7,15 @@ import com.whck.dmo.Dc;
 @Service
 public class CommandResolverImpl implements CommandResolver{
 
+
 	@Override
-	public Dc resolve(byte[] command) {
+	public String deResolve(Dc dc) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public byte[] deResolve(Dc dc) {
+	public Dc resolve(String command) {
 		// TODO Auto-generated method stub
 		return null;
 	}

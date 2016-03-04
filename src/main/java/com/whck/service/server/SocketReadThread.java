@@ -19,12 +19,12 @@ public class SocketReadThread extends Thread {
 	}
 
 	private DcService dcService;
-	private byte[] command;
+	private String command;
 	private Socket socket;
 	private CommandResolver resolver;
 	private Dc dc;
 
-	public byte[] getCommand() {
+	public String getCommand() {
 		return command;
 	}
 
@@ -41,7 +41,7 @@ public class SocketReadThread extends Thread {
 		for (Device device : devices) {
 			device.setState(1);
 		}
-		this.command = SocketUtil.read(socket);
+		this.command = SocketUtil.readString(socket);
 		this.dc = this.resolver.resolve(command);
 		this.dcService.save(dc);
 	}
