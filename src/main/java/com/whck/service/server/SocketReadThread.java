@@ -9,9 +9,9 @@ import com.whck.service.dc.CommandResolver;
 import com.whck.service.dc.DcService;
 import com.whck.util.SocketUtil;
 
-public class SocketThread extends Thread {
+public class SocketReadThread extends Thread {
 
-	public SocketThread(Socket socket, CommandResolver commandResolver, DcService dcService) {
+	public SocketReadThread(Socket socket, CommandResolver commandResolver, DcService dcService) {
 		super();
 		this.socket = socket;
 		this.resolver = commandResolver;
@@ -19,12 +19,12 @@ public class SocketThread extends Thread {
 	}
 
 	private DcService dcService;
-	private String command;
+	private byte[] command;
 	private Socket socket;
 	private CommandResolver resolver;
 	private Dc dc;
 
-	public String getCommand() {
+	public byte[] getCommand() {
 		return command;
 	}
 
@@ -41,7 +41,7 @@ public class SocketThread extends Thread {
 		for (Device device : devices) {
 			device.setState(1);
 		}
-		this.command = SocketUtil.readString(socket);
+		this.command = SocketUtil.read(socket);
 		this.dc = this.resolver.resolve(command);
 		this.dcService.save(dc);
 	}

@@ -1,7 +1,11 @@
 package com.whck.service.dc;
 
 import java.util.List;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 import javax.transaction.Transactional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,7 @@ import com.whck.dao.ZoneDao;
 import com.whck.dmo.Dc;
 import com.whck.dmo.Device;
 import com.whck.dmo.Zone;
+import com.whck.service.server.SocketSendThread;
 
 @Service
 @Transactional
@@ -40,6 +45,31 @@ public class DcServiceImpl implements DcService {
 			if (tmp2 == null) {
 				deviceDao.save(devices);
 			}
+		}
+
+	}
+
+	private ExecutorService executor;
+
+	@PostConstruct
+	private void init() {
+		this.executor = Executors.newCachedThreadPool();
+	}
+
+	@PreDestroy
+	private void destory() {
+		this.executor.shutdown();
+	}
+
+	@Autowired
+	private CommandResolver resolver;
+
+	@Override
+	public void sendCommand(Dc dc) throws Exception {
+		for (Device d : dc.getDevices()) {
+			SocketSendThread socketSendThread = new SocketSendThread(d, resolver);
+			socketSendThread.setDaemon(true);
+			executor.execute(socketSendThread);
 		}
 
 	}

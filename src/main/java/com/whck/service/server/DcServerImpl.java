@@ -7,6 +7,7 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.PreDestroy;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -28,7 +29,7 @@ public class DcServerImpl extends Thread implements DcServer {
 		while (this.isRunning) {
 			try {
 				Socket socket = server.accept();
-				SocketThread thread = new SocketThread(socket, commandResolver, dcService);
+				SocketReadThread thread = new SocketReadThread(socket, commandResolver, dcService);
 				thread.setDaemon(true);
 				executor.execute(thread);
 			} catch (IOException e) {
@@ -38,6 +39,10 @@ public class DcServerImpl extends Thread implements DcServer {
 	}
 
 	private ExecutorService executor;
+
+	public ExecutorService getExecutor() {
+		return executor;
+	}
 
 	private CommandResolver commandResolver;
 
@@ -56,16 +61,17 @@ public class DcServerImpl extends Thread implements DcServer {
 	private boolean isRunning = true;
 
 	@Override
+	@PreDestroy
 	public void stopServer() {
 		this.isRunning = false;
 		try {
 			if (!this.server.isClosed()) {
 				this.server.close();
 			}
+			this.executor.shutdown();
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-
 
 }

@@ -15,46 +15,44 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
-
 /**
  * The persistent class for the device database table.
  * 
  */
 @Entity
-@NamedQuery(name="Device.findAll", query="SELECT d FROM Device d")
+@NamedQuery(name = "Device.findAll", query = "SELECT d FROM Device d")
 public class Device implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@Column(name="device_id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@Column(name = "device_id")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer deviceId;
 
-	@Column(name="ctrl_mode")
+	@Column(name = "ctrl_mode")
 	private Integer ctrlMode;
 
-	@Column(name="ctrl_way")
+	@Column(name = "ctrl_way")
 	private Integer ctrlWay;
 
 	@Lob
 	private String description;
 
-	@Column(name="device_name")
+	@Column(name = "device_name")
 	private String deviceName;
 
 	private String ip;
 
 	private Integer state;
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="start_time")
+	@Column(name = "start_time")
 	private Date startTime;
-	
+
 	@Temporal(TemporalType.TIMESTAMP)
-	@Column(name="end_time")
+	@Column(name = "end_time")
 	private Date endTime;
-	
-	
-	@Column(name="run_time")
+
+	@Column(name = "run_time")
 	private Integer runTime;
 
 	public Date getStartTime() {
@@ -89,11 +87,11 @@ public class Device implements Serializable {
 		this.stopTime = stopTime;
 	}
 
-	@Column(name="stop_time")
+	@Column(name = "stop_time")
 	private Integer stopTime;
-	//bi-directional many-to-one association to Dc
+	// bi-directional many-to-one association to Dc
 	@ManyToOne
-	@JoinColumn(name="dc_id")
+	@JoinColumn(name = "dc_id")
 	private Dc dc;
 
 	public Device() {
@@ -163,5 +161,14 @@ public class Device implements Serializable {
 		this.dc = dc;
 	}
 
+	private Integer port;
+
+	public int getPort() {
+		return port;
+	}
+
+	public void setPort(Integer port) {
+		this.port = port;
+	}
 
 }
