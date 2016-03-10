@@ -35,8 +35,8 @@
 							class="form-control" id="remarks" placeholder="备注">
 					</div>
 					<div class="form-group">
-						<label for="username">管理员ID</label> <input type="text"
-							class="form-control" id="username" placeholder="管理员ID">
+						<label for="username">管理员用户名</label> <input type="text"
+							class="form-control" id="username" placeholder="管理员用户名">
 					</div>
 
 				</div>

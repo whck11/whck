@@ -15,9 +15,8 @@
 			<div class="col-xs-4">
 				<form method="post" action="${contextPath }/login/submit.do">
 					<div class="form-group">
-						<label for="username">邮箱：</label> <input type="email"
-							class="form-control" required="required" id="username" name="username"
-							placeholder="Email">
+						<label for="username">用户名：</label> <input
+							class="form-control" required="required" id="username" name="username">
 					</div>
 					<div class="form-group">
 						<label for="password">密码：</label> <input type="password"
