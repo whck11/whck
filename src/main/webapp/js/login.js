@@ -9,7 +9,7 @@ function bindLogin() {
 		function handler(data) {
 			if (data.success) {
 				var user = data.user;
-				alert("欢迎您" + user.name);
+				location.href="index.html";
 				var remember = $('#remember').is(':checked');
 				if (remember) {
 					localStorage.setItem('remember', true);

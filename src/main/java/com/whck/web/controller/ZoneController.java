@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -16,6 +17,7 @@ import com.whck.dao.UserDao;
 import com.whck.dao.ZoneDao;
 import com.whck.dmo.User;
 import com.whck.dmo.Zone;
+import com.whck.web.keys.Keys;
 
 @RequestMapping("zone")
 @Controller
@@ -49,16 +51,14 @@ public class ZoneController {
 
 	@RequestMapping("add.do")
 	@ResponseBody
-	public Map<String, Object> add(String zoneName, Double area, String longitude, String latitude, String remarks,
-			String username) {
+	public Map<String, Object> add(String zoneName, Double area, String longitude, String latitude,HttpSession session) {
 		Map<String, Object> map = new HashMap<>();
 		Zone zone = new Zone();
 		zone.setArea(area);
 		zone.setLatitude(latitude);
 		zone.setLongitude(longitude);
-		zone.setRemarks(remarks);
 		zone.setZoneName(zoneName);
-		User user = this.userDao.findByUsername(username);
+		User user = (User) session.getAttribute(Keys.LOGIN_SESSION_DATA);
 		zone.setUser(user);
 		this.zoneDao.save(zone);
 		map.put("success", true);

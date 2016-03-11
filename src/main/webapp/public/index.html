@@ -169,6 +169,8 @@
                                     <label>类型</label>
                                     <select class='form-control' id='sheng' onchange='change(this);'>
                                         <option value=''>--请选择类型--</option>
+                                        <option>单点</option>
+                                        <option>电机</option>
                                     </select>
                                     <label>设备</label>
                                     <select class='form-control' id='shi'>
@@ -348,17 +350,21 @@
                                 <div class="col-md-3">
                                     <div class="form-group">
                                         <label for="exampleInputName4">区域名称</label>
-                                        <input type="text" class="form-control" id="exampleInputName4" placeholder="Jane Doe">
+                                        <input type="text" class="form-control" id="input_zoneName" placeholder="Jane Doe">
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleInputEmail2">经纬度</label>
-                                        <input type="text" class="form-control" id="exampleInputEmail2" placeholder="jane.doe@example.com">
+                                        <label for="exampleInputEmail2">经度</label>
+                                        <input type="text" class="form-control" id="input_longitude" placeholder="jane.doe@example.com">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail2">纬度</label>
+                                        <input type="text" class="form-control" id="input_latitude" placeholder="jane.doe@example.com">
                                     </div>
                                     <div class="form-group">
                                         <label for="exampleInputName2">区域面积</label>
-                                        <input type="text" class="form-control" id="exampleInputName2" placeholder="Jane Doe">
+                                        <input type="text" class="form-control" id="input_area" placeholder="Jane Doe">
                                     </div>
-                                    <button type="button" class="btn btn-success" onclick="adddiv(this);">添加分区</button>
+                                    <button type="button" class="btn btn-success" onclick="adddiv(this);" id="btnAddZone">添加分区</button>
                                 </div>
                             </div>
                         </div>
@@ -780,6 +786,23 @@
 	<script src="../js/script.js" type="text/javascript"></script>
     <script src="../js/index.js" type="text/javascript"></script>
 	<script>
+	$(function(){
+		bindBtnAddZone();
+	})
+	function bindBtnAddZone(){
+		$('#btnAddZone').click(function(){
+			var zoneName=$('#input_zoneName').val();
+			var latitude=$('#input_latitude').val();
+			var longitude=$('#input_longitude').val();
+			var area=$('#input_area').val();
+			var params={zoneName:zoneName,latitude:latitude,area:area};
+			$.post('/whck/zone/add.do',params,function(data){
+				if(data.success){
+					alert('添加成功');
+				}
+			},'json');
+		});
+	}
 		jQuery(document).ready(function() {
             App.setPage("widgets_box");  //Set current page
             App.init(); //Initialise plugins and elements
