@@ -62,7 +62,7 @@ public class DeviceController {
 
 	@RequestMapping("add.do")
 	@ResponseBody
-	public Map<String, Object> add(String deviceName, String description, String ip, Integer port, Integer ctrlMode,
+	public Map<String, Object> add(String deviceName, String type,String description, String ip, Integer port, Integer ctrlMode,
 			Integer ctrlWay, String dc, Integer state) {
 		Map<String, Object> map = new HashMap<>();
 		Device device = new Device();

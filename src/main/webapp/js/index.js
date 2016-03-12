@@ -25,8 +25,8 @@ function st(){
 //存市的数组，根据省的数组添加
 var shis=new Array();
 shis[0]=new Array(new Option("--请选择设备--",''));
-shis[1]=new Array(new Option("降雨器",'jyq'),new Option("生长灯",'szd'),new Option("水泵",'sb'));
-shis[2]=new Array(new Option("风机",'fj'),new Option("天窗",'tc'),new Option("侧窗",'cc'));
+shis[1]=new Array(new Option("降雨器",'降雨器'),new Option("生长灯",'生长灯'),new Option("水泵",'水泵'));
+shis[2]=new Array(new Option("风机",'风机'),new Option("天窗",'天窗'),new Option("侧窗",'侧窗'));
 function change(obj){
     var shi=document.getElementById('shi');
     shi.options.length=0;

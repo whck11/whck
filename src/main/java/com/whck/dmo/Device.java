@@ -28,6 +28,16 @@ public class Device implements Serializable {
 	@Column(name = "device_id")
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer deviceId;
+	@Column(name = "type")
+	private String type;
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
 
 	@Column(name = "ctrl_mode")
 	private Integer ctrlMode;
