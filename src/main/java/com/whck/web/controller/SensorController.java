@@ -18,7 +18,7 @@ import com.whck.dmo.Sensor;
 public class SensorController {
 	@RequestMapping("add.do")
 	@ResponseBody
-	public Map<String, Object> add(String collectPointName, String collectPointUnit, String dc) {
+	public Map<String, Object> add(String collectPointName,String collectPointUnit, String dc) {
 		Map<String, Object> map = new HashMap<>();
 		Sensor sensor = new Sensor();
 		sensor.setCollectPointName(collectPointName);

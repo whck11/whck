@@ -17,10 +17,13 @@ public class CommandResolverImpl implements CommandResolver{
 	public Dc resolve(String command) {
 		int index=command.indexOf("E8E8E8E8E8E8E8E8");
 		index+=16;
-		String c=command.substring(index, index+3);
+		String c=command.substring(index, index+=3);
 		Dc dc=new Dc();
 		Device device=new Device();
-		
+		String id=command.substring(index,index+=11);
+		String longitude=command.substring(index, index+=3);
+		String latitude=command.substring(index, index+=3);
+		String lenth=command.substring(index,index+=2);
 		return null;
 	}
 

@@ -43,8 +43,8 @@ public class User implements Serializable {
 	@Column(name = "cncl_date")
 	private Date cnclDate;
 
-	@Column(name = "is_admin")
-	private Integer isAdmin;
+	@Column(name = "role")
+	private Integer role;
 
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "logon_date")
@@ -92,8 +92,8 @@ public class User implements Serializable {
 		return id;
 	}
 
-	public Integer getIsAdmin() {
-		return this.isAdmin;
+	public Integer getRole() {
+		return this.role;
 	}
 
 	public Date getLogonDate() {
@@ -152,8 +152,8 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	public void setIsAdmin(Integer isAdmin) {
-		this.isAdmin = isAdmin;
+	public void setRole(Integer role) {
+		this.role = role;
 	}
 
 	public void setLogonDate(Date logonDate) {

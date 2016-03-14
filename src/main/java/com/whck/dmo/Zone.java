@@ -22,13 +22,17 @@ public class Zone implements Serializable {
 
 	@Id
 	@Column(name = "zone_id")
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Integer zoneId;
 
 	private Double area;
-
+	/**
+	 * 纬度
+	 */
 	private String latitude;
-
+	/**
+	 * 经度
+	 */
 	private String longitude;
 
 	private String remarks;
