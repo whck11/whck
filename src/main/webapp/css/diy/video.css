@@ -1,0 +1,17 @@
+#videoWindow
+{
+    background: #181818;
+    /*margin-left: -250px;*/
+    /*left: 50%;*/
+    position: absolute;
+    z-index: 1;
+}
+.video-container
+{
+    width: 100%;
+    height: calc(100% - 30px);
+    color: #eee;
+    padding: 5px 0 0 0;
+    text-align: center;
+    font-size: 36px;
+}
