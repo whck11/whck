@@ -1,7 +1,12 @@
 package com.whck.util;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.springframework.stereotype.Service;
 
@@ -38,6 +43,26 @@ public class CommandResolverImpl implements CommandResolver {
 		List<Device> devices=new ArrayList<>();
 		devices.add(device);
 		dc.setDevices(devices);
+		if (c.equals("D00001")) {
+			File file=new File(new Random().nextInt()+"c.bin");
+			file.setWritable(true);
+			FileWriter writer=null;
+			try {
+				writer=new FileWriter(file);
+				writer.write(data);
+				file.createNewFile();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}finally{
+				if (null!=writer) {
+					try {
+						writer.close();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
 		return dc;
 	}
 
