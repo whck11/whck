@@ -16,7 +16,7 @@
 		<div style="float: right; margin-top: 30px;">
 			<ul style="list-style: none; float: right;">
 				<li style="float: right;"><a
-					href="${contextPath }/login/logOut.do" class="btn btn-default">注销</a></li>
+					href="${contextPath }/admin/login/logOut.do" class="btn btn-default">注销</a></li>
 				<li style="margin: 10px; float: right"></li>
 				<li style="float: right;"><a href="javascript:void(0)"
 					id="updatePassword" class="btn btn-default">修改密码</a></li>
@@ -36,7 +36,7 @@
 				</p>
 				<p>
 					<a href="javascript:void(0)" onclick="setFrm(this)"
-						data-url="${contextPath }/user/userList.do">用户列表</a>
+						data-url="${contextPath }/admin/userList.do">用户列表</a>
 				</p>
 			</div>
 			<div title="区域管理"

@@ -18,12 +18,12 @@ public class LoginHandlerInterceptor implements HandlerInterceptor {
 		boolean rt = false;
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute(Keys.LOGIN_SESSION_DATA);
-		if (user != null && user.getRole()>1) {
+		if (user != null && user.getRole().getId()<3) {
 			rt = true;
 		} else {
 			request.setAttribute(Keys.LOGIN_ERROR_TYPE, "500");
 			request.setAttribute(Keys.LOGIN_ERROR_MSG, "您没有管理员权限");
-			request.getRequestDispatcher("/login/error.do").forward(request, response);
+			request.getRequestDispatcher("/admin/login/error.do").forward(request, response);
 		}
 		return rt;
 	}

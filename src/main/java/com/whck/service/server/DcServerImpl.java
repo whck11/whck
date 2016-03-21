@@ -32,7 +32,6 @@ public class DcServerImpl extends Thread implements DcServer {
 				thread.setDaemon(true);
 				executor.execute(thread);
 			} catch (IOException e) {
-				e.printStackTrace();
 			}
 		}
 	}

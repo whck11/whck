@@ -17,7 +17,8 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/admin/**" />
-			<mvc:exclude-mapping path="/login/**"/>
+			<mvc:exclude-mapping path="/admin/login/**"/>
+			<mvc:exclude-mapping path="/admin/register/**"/>
 			<bean class="com.whck.web.interceptor.LoginHandlerInterceptor" />
 		</mvc:interceptor>
 	</mvc:interceptors>

@@ -3,11 +3,14 @@ package com.whck.util;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+import org.dom4j.Document;
+import org.dom4j.DocumentException;
+import org.dom4j.Element;
+import org.dom4j.io.SAXReader;
 import org.springframework.stereotype.Service;
 
 import com.whck.dmo.Dc;
@@ -66,4 +69,21 @@ public class CommandResolverImpl implements CommandResolver {
 		return dc;
 	}
 
+	@Override
+	public Zone resoleZoneFromXml(File file) {
+		Zone zone=new Zone();
+		Document document = null;
+		SAXReader saxReader = new SAXReader();
+		try {
+			document = saxReader.read(file);
+			Element root= document.getRootElement();
+			zone.setLatitude(root.elementText("latitude"));
+			zone.setLongitude(root.elementText("longtitude"));
+			zone.setArea(Double.valueOf(root.elementText("area")));
+			zone.setZoneName(root.elementText("zoneName"));
+		} catch (DocumentException e) {
+			e.printStackTrace();
+		} 
+		return zone;
+	}
 }

@@ -8,6 +8,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQuery;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -25,27 +27,35 @@ public class User implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name="user_id")
+	@Column(name = "user_id")
 	private Integer id;
-	
+
 	private String email;
-	
+
 	private String username;
 
 	@Column(name = "activate_code")
 	private String activateCode;
 
 	private String address;
-
+	/**
+	 * 公司名
+	 */
 	private String cname;
 
+	/**
+	 * 注销账户的时间
+	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "cncl_date")
 	private Date cnclDate;
 
-	@Column(name = "role")
-	private Integer role;
-
+	@JoinColumn(name="role")
+	@ManyToOne
+	private Role role;
+	/**
+	 * 登陆时间
+	 */
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name = "logon_date")
 	private Date logonDate;
@@ -92,7 +102,7 @@ public class User implements Serializable {
 		return id;
 	}
 
-	public Integer getRole() {
+	public Role getRole() {
 		return this.role;
 	}
 
@@ -152,7 +162,7 @@ public class User implements Serializable {
 		this.id = id;
 	}
 
-	public void setRole(Integer role) {
+	public void setRole(Role role) {
 		this.role = role;
 	}
 

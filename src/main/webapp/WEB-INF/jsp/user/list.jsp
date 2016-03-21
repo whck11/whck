@@ -14,7 +14,7 @@
 	function loadTable() {
 		$('#dg').datagrid(
 				{
-					url : contextPath + "/user/userListAjax.do",
+					url : contextPath + "/admin/userListAjax.do",
 					singleSelect:true,
 					columns : [ [ {
 						field : 'username',
@@ -25,6 +25,13 @@
 						title : '姓名',
 						width : 100
 					}, {
+						field : 'role',
+						title : '权限',
+						width : 100,
+						formatter:function(value,row){
+							return value.name;
+						}
+					} ,{
 						field : 'phone',
 						title : '手机',
 						width : 100
@@ -52,7 +59,7 @@
 						iconCls : 'icon-add',
 						text:'添加',
 						handler : function() {
-							window.location=contextPath+'/user/addPage.do';
+							window.location=contextPath+'/admin/addPage.do';
 						}
 					}, '-', {
 						iconCls : 'icon-edit',
@@ -60,7 +67,7 @@
 						handler : function() {
 							var obj=$('#dg').datagrid('getSelected');
 							if(obj){
-								window.location=contextPath+'/user/updatePage.do?username='+obj.username;
+								window.location=contextPath+'/admin/updatePage.do?username='+obj.username;
 							}else{
 								alert('请选中一行');
 							}
@@ -70,7 +77,7 @@
 						text:'删除',
 						handler : function() {
 							var obj=$('#dg').datagrid('getSelected');
-							var url=contextPath+'/user/remove.do';
+							var url=contextPath+'/admin/remove.do';
 							$.post(url,{username:obj.username},function(data){
 								if(data.success){
 									$('#dg').datagrid('reload');
